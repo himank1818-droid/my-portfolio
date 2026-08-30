@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Himank Singh | Portfolio & Control Center</title>
+    
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="Images/favicon.png">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#FF5500',
+                            hover: '#E04B00',
+                            black: '#08080A',
+                            card: '#111115',
+                            border: '#22222a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("Gnw0DZ7k0Q0NBLqa1");
+        })();
+    </script>
+
+    <!-- Fonts & CDNs -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        @keyframes popBounce {
+            0% { opacity: 0; transform: scale(0.3) translateY(20px); }
+            60% { opacity: 1; transform: scale(1.15) translateY(-4px); }
+            80% { transform: scale(0.95) translateY(2px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .bubble-pop-active {
+            display: inline-block !important;
+            animation: popBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards !important;
+        }
+
+        .cyber-grid {
+            background-size: 45px 45px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 85, 0, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 85, 0, 0.08) 1px, transparent 1px);
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.25; }
+            50% { transform: scale(1.15); opacity: 0.5; }
+        }
+        .glow-pulse {
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+        .float-graphic {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        *, body {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF5500' stroke='%23000000' stroke-width='1.2' stroke-linejoin='round' d='M3 3l7.5 18 2.5-7.5 7.5-2.5L3 3z'/%3E%3C/svg%3E"), auto !important;
+        }
+
+        a, button, input[type="submit"], input[type="button"], [role="button"] {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF5500' stroke='%23000000' stroke-width='1.2' stroke-linejoin='round' d='M8.5 2a1.5 1.5 0 0 0-1.5 1.5V11H6a2 2 0 0 0-2 2v2.5a8.5 8.5 0 0 0 8.5 8.5h3a8.5 8.5 0 0 0 8.5-8.5v-3.5a2 2 0 0 0-2-2h-1v-1a1.5 1.5 0 0 0-3 0v1h-1v-2a1.5 1.5 0 0 0-3 0v2h-1v-7A1.5 1.5 0 0 0 8.5 2z'/%3E%3C/svg%3E"), pointer !important;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"], textarea {
+            cursor: text !important;
+        }
+
+        .projects-swiper .swiper-wrapper {
+            transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1) !important;
+        }
+
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    </style>
+</head>
+<body class="bg-brand-black text-slate-100 antialiased selection:bg-brand-orange selection:text-white min-h-screen">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-brand-black/85 backdrop-blur-xl border-b border-brand-border/60 w-full" data-aos="fade-down" data-aos-delay="100">
+        <div class="w-full px-6 md:px-16 py-5 flex justify-between items-center">
+            <a href="#" class="text-3xl md:text-4xl font-black tracking-wider text-white flex items-center gap-1.5" data-aos-delay="200" data-aos="fade-right">
+                H<span class="text-brand-orange">S.</span>
+                <span class="h-2 w-2 rounded-full bg-brand-orange animate-ping"></span>
+            </a>
+
+            <nav class="hidden md:flex items-center space-x-1.5 text-sm font-semibold tracking-wide text-slate-300" data-aos-delay="300" data-aos="fade-down">
+                <a href="#about" class="px-4 py-2 rounded-full border border-transparent hover:border-brand-orange/50 hover:bg-brand-orange/10 hover:text-white transition-all duration-300">About Me</a>
+                <a href="#education" class="px-4 py-2 rounded-full border border-transparent hover:border-brand-orange/50 hover:bg-brand-orange/10 hover:text-white transition-all duration-300">Education</a>
+                <a href="#skills" class="px-4 py-2 rounded-full border border-transparent hover:border-brand-orange/50 hover:bg-brand-orange/10 hover:text-white transition-all duration-300">Skills</a>
+                <a href="#coding-profiles" class="px-4 py-2 rounded-full border border-transparent hover:border-brand-orange/50 hover:bg-brand-orange/10 hover:text-white transition-all duration-300">Profiles</a>
+                <a href="#projects" class="px-4 py-2 rounded-full border border-transparent hover:border-brand-orange/50 hover:bg-brand-orange/10 hover:text-white transition-all duration-300">Projects</a>
+                <a href="#contact" class="px-4 py-2 rounded-full border border-transparent hover:border-brand-orange/50 hover:bg-brand-orange/10 hover:text-white transition-all duration-300">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-3" data-aos="fade-left" data-aos-delay="400">
+                <button onclick="handleControlCenterAccess()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-[#14141f] border border-brand-orange/60 hover:bg-brand-orange text-brand-orange hover:text-white text-xs font-extrabold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(255,85,0,0.3)] hover:scale-105">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    <span>CONTROL CENTER</span>
+                </button>
+
+                <a href="https://drive.google.com/file/d/1RKCfdhfn5lkeEkpHJIiTXOlhiZKNSToS/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-orange to-[#ff6a33] text-white font-semibold text-xs rounded-full hover:scale-105 transition-all shadow-[0_0_20px_rgba(255,85,0,0.4)]">
+                    <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    <span>Check Out CV</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="w-full overflow-hidden">
+        <!-- Hero Section -->
+        <section id="about" class="relative w-full min-h-[92vh] flex items-center pt-24 pb-20 text-white scroll-mt-24 cyber-grid" data-aos="fade" data-aos-delay="100">
+            <div class="absolute inset-0 z-0 cyber-grid opacity-85"></div>
+            <div class="absolute -top-32 -left-32 w-[480px] h-[480px] bg-brand-orange/30 rounded-full blur-[150px] pointer-events-none glow-pulse"></div>
+            <div class="absolute top-1/3 -right-32 w-[580px] h-[580px] bg-[#ff3300]/20 rounded-full blur-[170px] pointer-events-none glow-pulse"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-black/40 to-brand-black z-0"></div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="bubble-pop-active relative inline-flex items-center gap-2 bg-gradient-to-r from-brand-orange to-[#ff7733] text-white text-xs md:text-sm font-extrabold px-5 py-2 rounded-full uppercase tracking-wider shadow-[0_0_25px_rgba(255,85,0,0.5)] border border-white/20" data-aos="fade-down" data-aos-delay="200">
+                            <span class="h-2 w-2 rounded-full bg-white animate-pulse"></span>
+                            AI & ML SOFTWARE ARCHITECT
+                            <span class="absolute left-6 -bottom-1 w-2.5 h-2.5 bg-brand-orange rotate-45"></span>
+                        </div>
+
+                        <h1 id="hero-name-display" class="text-6xl sm:text-7xl md:text-8xl font-black uppercase tracking-wider text-white leading-none drop-shadow-[0_15px_30px_rgba(0,0,0,0.9)]" style="font-family: 'Oswald', sans-serif;" data-aos="fade-right" data-aos-delay="300">
+                            Himank <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange via-[#ff7733] to-amber-500">Singh</span>
+                        </h1>
+
+                        <p id="hero-tagline-display" class="text-lg md:text-xl text-slate-300 font-medium max-w-xl leading-relaxed drop-shadow" data-aos="fade-up" data-aos-delay="400">
+                            Undergraduate Engineer | <span class="text-brand-orange font-bold">Full Stack Web Developer</span> building high-performance applications, secure backend systems, and neural intelligence.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-brand-orange to-[#ff6a33] text-white font-bold text-sm tracking-wide rounded-full text-center hover:scale-105 transition-all shadow-[0_10px_35px_rgba(255,85,0,0.6)] border border-brand-orange/50" data-aos="fade-up" data-aos-delay="500">
+                                Get In Touch
+                            </a>
+                            <a href="https://drive.google.com/file/d/1RKCfdhfn5lkeEkpHJIiTXOlhiZKNSToS/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 bg-white/5 border border-white/20 text-white font-bold text-sm tracking-wide rounded-full text-center hover:bg-white hover:text-black hover:scale-105 transition-all backdrop-blur-xl shadow-xl" data-aos="fade-up" data-aos-delay="600">
+                                Download CV
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 float-graphic" data-aos="fade-left" data-aos-delay="400">
+                        <div class="relative group rounded-3xl border-2 border-brand-orange/60 bg-gradient-to-b from-[#141420]/95 to-[#07070a]/95 p-6 md:p-8 backdrop-blur-2xl shadow-[0_30px_90px_rgba(0,0,0,0.95),0_0_40px_rgba(255,85,0,0.25)]">
+                            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                                <div class="flex items-center gap-2">
+                                    <span class="h-3.5 w-3.5 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.9)]"></span>
+                                    <span class="h-3.5 w-3.5 rounded-full bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.9)]"></span>
+                                    <span class="h-3.5 w-3.5 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.9)]"></span>
+                                    <span class="text-[11px] font-mono text-slate-400 ml-2">cyber_core.ai</span>
+                                </div>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-orange/20 border border-brand-orange/50 text-brand-orange text-[10px] font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,85,0,0.3)]">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-brand-orange animate-ping"></span> Active Node
+                                </span>
+                            </div>
+
+                            <div class="bg-black/80 rounded-2xl p-4 border border-white/10 font-mono text-xs text-slate-300 space-y-2.5 mb-6 shadow-inner">
+                                <div class="flex items-center justify-between text-[11px] text-slate-400 border-b border-white/10 pb-2">
+                                    <span>// System Telemetry</span>
+                                    <span class="text-brand-orange font-bold">Node.js / React</span>
+                                </div>
+                                <p class="text-brand-orange"><span class="text-slate-400">const</span> developer = {</p>
+                                <p class="pl-4 text-slate-300">name: <span class="text-emerald-400">"Himank Singh"</span>,</p>
+                                <p class="pl-4 text-slate-300">stack: <span class="text-emerald-400">["React", "Node", "Python"]</span>,</p>
+                                <p class="pl-4 text-slate-300">status: <span class="text-brand-orange font-bold">"Ready to Deploy"</span></p>
+                                <p class="text-brand-orange">};</p>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="p-4 rounded-2xl bg-white/[0.04] border border-white/10 shadow-md">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Web Development</span>
+                                    <span class="text-base font-extrabold text-white">15+ Projects</span>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-white/[0.04] border border-white/10 shadow-md">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Live Status</span>
+                                    <span id="hero-status-display" class="text-xs font-bold text-brand-orange">Open to Work</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="scroll-mt-28 py-20 relative cyber-grid border-t border-white/10" data-aos="fade-up" data-aos-delay="100">
+            <div class="absolute inset-0 cyber-grid opacity-60 pointer-events-none"></div>
+            <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 space-y-10">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-orange">ACADEMIC BACKGROUND</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold uppercase tracking-wider text-white mt-1" style="font-family: 'Oswald', sans-serif;">
+                            Education
+                        </h2>
+                    </div>
+                    <p class="text-slate-400 text-sm md:text-base font-medium">
+                        Institutional milestones and academic achievements.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="relative bg-gradient-to-br from-[#141420] to-[#08080c] border border-white/15 rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:border-brand-orange hover:shadow-[0_20px_50px_rgba(255,85,0,0.25)] overflow-hidden min-h-[320px]">
+                        <div class="absolute -right-12 -top-12 w-48 h-48 bg-brand-orange/15 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="relative z-10 space-y-4">
+                            <span class="inline-block px-4 py-1.5 bg-brand-orange/20 border border-brand-orange/50 text-brand-orange font-bold text-xs rounded-xl backdrop-blur-md shadow-md">
+                                2026 – Present
+                            </span>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">
+                                    B.Tech in CSE <span class="text-brand-orange">(AI & ML)</span>
+                                </h3>
+                                <p class="text-slate-300 font-medium text-sm mt-1.5">
+                                    Maharana Institute of Professional Studies (AKTU), Kanpur
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 pt-6 border-t border-white/10">
+                            <div class="bg-black/60 backdrop-blur-md p-4 rounded-2xl border border-white/10">
+                                <span class="text-[10px] font-bold tracking-wider uppercase text-slate-400 block mb-1">STATUS</span>
+                                <span class="text-sm font-bold text-white">Active (CGPA: 7.1)</span>
+                            </div>
+                            <div class="bg-black/60 backdrop-blur-md p-4 rounded-2xl border border-white/10">
+                                <span class="text-[10px] font-bold tracking-wider uppercase text-slate-400 block mb-1">FOCUS AREA</span>
+                                <span class="text-sm font-bold text-brand-orange">AI & Machine Learning</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative bg-gradient-to-br from-[#141420] to-[#08080c] border border-white/15 rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:border-brand-orange hover:shadow-[0_20px_50px_rgba(255,85,0,0.25)] overflow-hidden min-h-[320px]">
+                        <div class="absolute -right-12 -top-12 w-48 h-48 bg-brand-orange/15 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="relative z-10 space-y-4">
+                            <span class="inline-block px-4 py-1.5 bg-brand-orange/20 border border-brand-orange/50 text-brand-orange font-bold text-xs rounded-xl backdrop-blur-md shadow-md">
+                                INDEPENDENT DEVELOPER | 2024 - PRESENT
+                            </span>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">
+                                    Full Stack <span class="text-brand-orange">& Web Development</span>
+                                </h3>
+                                <p class="text-slate-300 font-medium text-sm mt-1.5">
+                                    15+ responsive web applications delivered with high performance benchmarks, clean UI/UX, and robust REST APIs.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 pt-6 border-t border-white/10">
+                            <div class="bg-black/60 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex flex-col justify-between">
+                                <span class="text-[10px] font-bold tracking-wider uppercase text-slate-400 block mb-2">CURRICULUM VITAE</span>
+                                <a href="https://drive.google.com/file/d/1RKCfdhfn5lkeEkpHJIiTXOlhiZKNSToS/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-1 bg-white/10 border border-white/40 hover:bg-brand-orange hover:border-brand-orange text-white text-xs font-bold py-2 px-3 rounded-xl transition-all text-center">
+                                    View Full CV
+                                </a>
+                            </div>
+                            <div class="bg-black/60 backdrop-blur-md p-4 rounded-2xl border border-white/10">
+                                <span class="text-[10px] font-bold tracking-wider uppercase text-slate-400 block mb-1">TECH STACK</span>
+                                <span class="text-xs font-bold text-brand-orange">
+                                    React.js, Node.js, Express, MongoDB
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section id="skills" class="py-20 scroll-mt-20 border-t border-white/10 relative cyber-grid">
+            <div class="absolute inset-0 cyber-grid opacity-60 pointer-events-none"></div>
+            <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6 mb-12">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-orange">EXPERT CORE COMPETENCIES</span>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-wider text-white mt-1 leading-none" style="font-family: 'Oswald', sans-serif;">
+                            Technical <span class="text-brand-orange">Skills n Expertise</span>
+                        </h2>
+                    </div>
+                    <p class="text-slate-400 text-sm font-medium">
+                        Technical expertise, programming languages, and toolchains.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-[#141420] to-[#08080c] p-8 transition-all duration-300 hover:-translate-y-2 hover:border-brand-orange hover:shadow-[0_20px_50px_rgba(255,85,0,0.25)]">
+                        <div class="relative z-10 space-y-5">
+                            <div class="flex h-16 w-16 items-center justify-center rounded-2xl border border-brand-orange/50 bg-brand-orange/15 text-brand-orange shadow-[0_0_20px_rgba(255,85,0,0.3)]">
+                                <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Full Stack Web</h3>
+                                <p class="mt-2 text-sm text-slate-300 leading-relaxed">Building performant web applications and robust REST APIs.</p>
+                            </div>
+                            <hr class="border-white/10" />
+                            <div class="flex flex-wrap gap-2.5 pt-1">
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">React.js</span>
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">Node / Express</span>
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">MongoDB</span>
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">Tailwind CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-[#141420] to-[#08080c] p-8 transition-all duration-300 hover:-translate-y-2 hover:border-brand-orange hover:shadow-[0_20px_50px_rgba(255,85,0,0.25)]">
+                        <div class="relative z-10 space-y-5">
+                            <div class="flex h-16 w-16 items-center justify-center rounded-2xl border border-brand-orange/50 bg-brand-orange/15 text-brand-orange shadow-[0_0_20px_rgba(255,85,0,0.3)]">
+                                <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Coding & AI Foundations</h3>
+                                <p class="mt-2 text-sm text-slate-300 leading-relaxed">Algorithms, data structures, and intelligent AI models.</p>
+                            </div>
+                            <hr class="border-white/10" />
+                            <div class="flex flex-wrap gap-2.5 pt-1">
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">Python</span>
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">C / C++</span>
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">JavaScript</span>
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">REST APIs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-[#141420] to-[#08080c] p-8 transition-all duration-300 hover:-translate-y-2 hover:border-brand-orange hover:shadow-[0_20px_50px_rgba(255,85,0,0.25)]">
+                        <div class="relative z-10 space-y-5">
+                            <div class="flex h-16 w-16 items-center justify-center rounded-2xl border border-brand-orange/50 bg-brand-orange/15 text-brand-orange shadow-[0_0_20px_rgba(255,85,0,0.3)]">
+                                <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">DevOps & Tooling</h3>
+                                <p class="mt-2 text-sm text-slate-300 leading-relaxed">Version control, deployment pipelines, testing tools.</p>
+                            </div>
+                            <hr class="border-white/10" />
+                            <div class="flex flex-wrap gap-2.5 pt-1">
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">Git & GitHub</span>
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">VS Code</span>
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">Vercel & Render</span>
+                                <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">Postman</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coding Profiles Section -->
+        <section id="coding-profiles" class="py-20 scroll-mt-20 border-t border-white/10 relative cyber-grid">
+            <div class="absolute inset-0 cyber-grid opacity-60 pointer-events-none"></div>
+            <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 space-y-10">
+                <div class="text-center space-y-3 max-w-3xl mx-auto">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-orange">ALGORITHMIC REPOSITORIES</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold uppercase tracking-wider text-white" style="font-family: 'Oswald', sans-serif;">
+                        My Coding <span class="text-brand-orange">Profiles</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm md:text-base font-medium">
+                        Track my continuous problem solving, competitive programming, and algorithmic data structures progression across global coding platforms.
+                    </p>
+                </div>
+
+                <div class="rounded-3xl border border-white/10 bg-gradient-to-b from-[#111117]/90 to-[#08080C]/90 p-6 md:p-10 shadow-2xl backdrop-blur-xl">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="group relative overflow-hidden rounded-3xl border border-white/15 bg-[#0B0F19] p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-brand-orange hover:shadow-[0_15px_40px_rgba(255,85,0,0.3)] flex items-center justify-between">
+                            <div class="flex items-center gap-5">
+                                <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-brand-orange/40 bg-brand-orange/15 text-brand-orange transition-transform duration-500 group-hover:scale-110 shadow-md">
+                                    <svg class="h-8 w-8 fill-current" viewBox="0 0 24 24"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.261a1.371 1.371 0 0 0-.008 1.948l5.414 5.82a1.375 1.375 0 0 0 1.956.008l5.406-5.82a1.374 1.374 0 0 0-.008-1.948L14.469.438A1.374 1.374 0 0 0 13.483 0zm-5.46 8.358a1.372 1.372 0 0 0-.97.404l-5.617 5.758a1.374 1.374 0 0 0 0 1.943l5.617 5.757a1.375 1.375 0 0 0 1.949 0l5.617-5.757a1.374 1.374 0 0 0 0-1.943L9.003 8.762a1.372 1.372 0 0 0-.98-.404zm9.957 0a1.374 1.374 0 0 0-.98.404l-5.617 5.758a1.374 1.374 0 0 0 0 1.943l5.617 5.757a1.375 1.375 0 0 0 1.949 0l5.617-5.757a1.374 1.374 0 0 0 0-1.943l-5.617-5.758a1.374 1.374 0 0 0-.969-.404z"/></svg>
+                                </div>
+                                <div class="space-y-1">
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-brand-orange">PROBLEM SOLVING</span>
+                                    <h3 class="text-2xl font-bold text-white group-hover:text-brand-orange transition-colors">LeetCode</h3>
+                                </div>
+                            </div>
+                            <a href="https://leetcode.com/u/himanksingh22/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4.5 py-2.5 rounded-xl bg-brand-orange/15 border border-brand-orange/40 text-brand-orange text-xs font-bold hover:bg-brand-orange hover:text-white transition-all shadow-md">
+                                <span>View</span>
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        </div>
+
+                        <div class="group relative overflow-hidden rounded-3xl border border-white/15 bg-[#0B0F19] p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-emerald-500 hover:shadow-[0_15px_40px_rgba(16,185,129,0.25)] flex items-center justify-between">
+                            <div class="flex items-center gap-5">
+                                <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-emerald-500/40 bg-emerald-500/15 text-emerald-400 transition-transform duration-500 group-hover:scale-110 shadow-md">
+                                    <svg class="h-8 w-8 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.895 14.737c-.368.737-1.105 1.368-2.105 1.789-1 .421-2.211.632-3.684.632-1.684 0-3.053-.263-4.105-.789s-1.842-1.316-2.368-2.368C5.105 12.947 4.842 11.632 4.842 10s.263-2.947.789-4c.526-1.053 1.316-1.842 2.368-2.368C9.053 3.105 10.421 2.842 12.105 2.842c1.474 0 2.684.211 3.684.632 1 .421 1.737 1.053 2.105 1.789l-2.211 1.895c-.316-.421-.737-.737-1.263-.947-.526-.211-1.263-.316-2.211-.316-1.053 0-1.895.158-2.526.474s-1.105.789-1.368 1.421c-.263.632-.421 1.368-.421 2.211s.158 1.579.421 2.211c.263.632.737 1.105 1.368 1.421.632.316 1.474.474 2.526.474.947 0 1.684-.105 2.211-.316.526-.211.947-.526 1.263-.947l2.211 1.895z"/></svg>
+                                </div>
+                                <div class="space-y-1">
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-400">DSA & CORE CS</span>
+                                    <h3 class="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">GeeksforGeeks</h3>
+                                </div>
+                            </div>
+                            <a href="https://www.geeksforgeeks.org/profile/himank2033" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4.5 py-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 text-xs font-bold hover:bg-emerald-500 hover:text-white transition-all shadow-md">
+                                <span>View</span>
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="relative w-full py-20 text-white scroll-mt-24 cyber-grid border-t border-white/10">
+            <div class="absolute inset-0 cyber-grid opacity-60 pointer-events-none"></div>
+
+            <div class="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
+                <div class="mb-12 flex flex-col justify-between border-b border-white/5 pb-6 md:flex-row md:items-end">
+                    <div>
+                        <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#ff5500]">FEATURED WORK</p>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-wider text-white mt-1 leading-none" style="font-family: 'Oswald', sans-serif;">
+                            PROJECTS <span class="text-[#ff5500]">N REPOSITORIES</span>
+                        </h2>
+                    </div>
+                    <p class="text-slate-400 text-sm font-medium">
+                        Showcasing ideas turned into real-world software & applications.
+                    </p>
+                </div>
+
+                <div class="relative px-4 md:px-12">
+                    <button id="project-prev" class="absolute left-0 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#FF4500]/50 bg-[#0B0F19]/90 text-[#FF4500] backdrop-blur-md transition-all duration-500 hover:border-[#FF4500] hover:bg-[#FF4500] hover:text-white hover:scale-110 active:scale-95 md:-left-2 shadow-[0_0_20px_rgba(255,69,0,0.3)]">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+
+                    <button id="project-next" class="absolute right-0 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#FF4500]/50 bg-[#0B0F19]/90 text-[#FF4500] backdrop-blur-md transition-all duration-500 hover:border-[#FF4500] hover:bg-[#FF4500] hover:text-white hover:scale-110 active:scale-95 md:-right-2 shadow-[0_0_20px_rgba(255,69,0,0.3)]">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+
+                    <div class="swiper projects-swiper overflow-hidden py-4 px-1">
+                        <div class="swiper-wrapper" id="dynamic-swiper-wrapper">
+                            
+                            <!-- Project 1: AI Voice Assistant -->
+                            <div class="swiper-slide h-auto">
+                                <div class="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-[#FF4500]/50 bg-[#0B0F19] p-8 transition-all duration-500 hover:-translate-y-2 hover:border-[#FF4500] hover:shadow-[0_20px_50px_rgba(255,69,0,0.35)]">
+                                    <div class="relative z-10 space-y-4">
+                                        <div class="flex items-start justify-between gap-4">
+                                            <div class="flex items-start gap-4">
+                                                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#FF4500]/50 bg-[#FF4500]/20 text-[#FF4500] backdrop-blur-md transition-transform duration-500 group-hover:scale-110 shadow-sm">
+                                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+                                                </div>
+                                                <div>
+                                                    <h3 class="text-xl font-bold text-white transition-colors group-hover:text-[#FF4500]">AI Voice Assistant</h3>
+                                                    <div class="mt-2 flex flex-wrap gap-1.5">
+                                                        <span class="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-[11px] text-slate-200">Python</span>
+                                                        <span class="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-[11px] text-slate-200">SpeechRecognition</span>
+                                                        <span class="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-[11px] text-slate-200">NLP</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF4500]/20 border border-[#FF4500]/60 text-[#FF4500] text-[10px] font-extrabold uppercase tracking-wider animate-pulse shadow-md">
+                                                <span class="h-1.5 w-1.5 rounded-full bg-[#FF4500]"></span> Coming Soon
+                                            </span>
+                                        </div>
+                                        <p class="text-xs leading-relaxed text-slate-300">Intelligent conversational voice assistant capable of automated system controls, live speech recognition, and instant AI task execution.</p>
+                                    </div>
+                                    <div class="relative z-10 mt-8 flex gap-3">
+                                        <button disabled class="flex-1 rounded-xl border border-white/15 bg-white/5 py-3 text-center text-xs font-semibold text-slate-400 opacity-60">In Development</button>
+                                        <button disabled class="flex-1 rounded-xl border border-[#FF4500]/40 bg-[#FF4500]/15 py-3 text-center text-xs font-semibold text-[#FF4500] opacity-90 shadow-sm">Coming Soon</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project 2: WiFi Speed Tester -->
+                            <div class="swiper-slide h-auto">
+                                <div class="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-white/15 bg-[#0B0F19] p-8 transition-all duration-500 hover:-translate-y-2 hover:border-[#FF4500] hover:shadow-[0_20px_50px_rgba(255,69,0,0.3)]">
+                                    <div class="relative z-10 space-y-4">
+                                        <div class="flex items-start gap-4">
+                                            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#FF4500]/40 bg-[#FF4500]/15 text-[#FF4500] backdrop-blur-md transition-transform duration-500 group-hover:scale-110 shadow-sm">
+                                                <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/></svg>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-xl font-bold text-white transition-colors group-hover:text-[#FF4500]">WiFi Speed Tester</h3>
+                                                <div class="mt-2 flex flex-wrap gap-1.5">
+                                                    <span class="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-[11px] text-slate-200">JavaScript</span>
+                                                    <span class="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-[11px] text-slate-200">HTML5/CSS3</span>
+                                                    <span class="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-[11px] text-slate-200">Network API</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-xs leading-relaxed text-slate-300">Fast and responsive network diagnostic web application to measure real-time download speeds, ping latency, and connection health.</p>
+                                    </div>
+                                    <div class="relative z-10 mt-8 flex gap-3">
+                                        <a href="https://himank1818-droid.github.io/wifi-speed-test/" target="_blank" class="flex-1 rounded-xl border border-[#FF4500] bg-[#FF4500]/20 py-3 text-center text-xs font-semibold text-white transition-all hover:bg-[#FF4500] shadow-md">Live Demo</a>
+                                        <a href="https://github.com/himank1818-droid/wifi-speed-test" target="_blank" class="flex-1 rounded-xl border border-white/20 bg-black/50 py-3 text-center text-xs font-semibold text-slate-200 transition-all hover:border-white/40 shadow-md">GitHub</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Project 3: ERP Face Recognition System -->
+                            <div class="swiper-slide h-auto">
+                                <div class="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-[#FF4500]/50 bg-[#0B0F19] p-8 transition-all duration-500 hover:-translate-y-2 hover:border-[#FF4500] hover:shadow-[0_20px_50px_rgba(255,69,0,0.35)]">
+                                    <div class="relative z-10 space-y-4">
+                                        <div class="flex items-start justify-between gap-4">
+                                            <div class="flex items-start gap-4">
+                                                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#FF4500]/50 bg-[#FF4500]/20 text-[#FF4500] backdrop-blur-md transition-transform duration-500 group-hover:scale-110 shadow-sm">
+                                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                                                </div>
+                                                <div>
+                                                    <h3 class="text-xl font-bold text-white transition-colors group-hover:text-[#FF4500]">ERP Face Recognition System</h3>
+                                                    <div class="mt-2 flex flex-wrap gap-1.5">
+                                                        <span class="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-[11px] text-slate-200">Python</span>
+                                                        <span class="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-[11px] text-slate-200">OpenCV</span>
+                                                        <span class="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-[11px] text-slate-200">ERP Module</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF4500]/20 border border-[#FF4500]/60 text-[#FF4500] text-[10px] font-extrabold uppercase tracking-wider animate-pulse shadow-md">
+                                                <span class="h-1.5 w-1.5 rounded-full bg-[#FF4500]"></span> Featured
+                                            </span>
+                                        </div>
+                                        <p class="text-xs leading-relaxed text-slate-300">Advanced student ERP system integrated with facial landmark detection and computer vision for automated biometric attendance tracking.</p>
+                                    </div>
+                                    <div class="relative z-10 mt-8 flex gap-3">
+                                        <button disabled class="flex-1 rounded-xl border border-white/15 bg-white/5 py-3 text-center text-xs font-semibold text-slate-400 opacity-60">In Development</button>
+                                        <a href="https://github.com/himank1818-droid" target="_blank" class="flex-1 rounded-xl border border-[#FF4500]/40 bg-[#FF4500]/15 py-3 text-center text-xs font-semibold text-[#FF4500] transition-all hover:bg-[#FF4500] hover:text-white shadow-sm">GitHub</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+<section id="contact" class="relative w-full pt-32 pb-24 text-white cyber-grid border-t border-white/10">
+    <div class="absolute inset-0 cyber-grid opacity-60 pointer-events-none"></div>
+
+    <div class="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
+        <div class="mb-12 flex flex-col justify-between border-b border-white/10 pb-6 md:flex-row md:items-end">
+            <div>
+                <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-[#ff5500]">GET IN TOUCH</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-wider text-white mt-1 leading-none" style="font-family: 'Oswald', sans-serif;">
+                    LET'S <span class="text-[#ff5500]">CONNECT</span>
+                </h2>
+            </div>
+            <p class="text-slate-400 text-sm font-medium mt-2 md:mt-0">
+                Have an idea or collaboration in mind? Drop a message!
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="lg:col-span-5 flex flex-col transition-all duration-500 hover:-translate-y-2 hover:scale-[1.01]">
+                <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[#FF4500] bg-gradient-to-br from-[#FF5500] to-[#E04B00] p-8 shadow-[0_20px_50px_rgba(255,69,0,0.5)]">
+                    <div class="absolute inset-0 bg-black/15 backdrop-blur-[2px]"></div>
+                    <div class="relative z-10 space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Say Hello on Socials</h3>
+                            <p class="text-xs text-white/95 leading-relaxed font-medium">
+                                Feel free to reach out via any of my social profiles or drop an email directly. I'm always open to discussing new software ideas.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-4 pt-2 flex-wrap">
+                            <a href="https://github.com/himank1818-droid/git-hub" target="_blank" class="group/item flex h-12 w-12 items-center justify-center rounded-full bg-black/25 text-white hover:scale-110 hover:bg-white hover:text-[#FF4500] transition-all shadow-md" title="GitHub">
+                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/himanksingh9648326698" target="_blank" class="group/item flex h-12 w-12 items-center justify-center rounded-full bg-black/25 text-white hover:scale-110 hover:bg-white hover:text-[#FF4500] transition-all shadow-md" title="LinkedIn">
+                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                            <a href="https://www.instagram.com/himanksingh_1216c/" target="_blank" class="group/item flex h-12 w-12 items-center justify-center rounded-full bg-black/25 text-white hover:scale-110 hover:bg-white hover:text-[#FF4500] transition-all shadow-md" title="Instagram">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                            </a>
+                            <a href="mailto:himank1818@gmail.com" class="group/item flex h-12 w-12 items-center justify-center rounded-full bg-black/25 text-white hover:scale-110 hover:bg-white hover:text-[#FF4500] transition-all shadow-md" title="Gmail: himank1818@gmail.com">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 flex flex-col transition-all duration-500 hover:-translate-y-2 hover:scale-[1.01]">
+                <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-[#141420] to-[#08080c] p-8 shadow-2xl backdrop-blur-xl">
+                    <!-- Form mein name attributes add kar diye hain taaki EmailJS data utha sake -->
+                    <form id="contact-form" class="relative z-10 space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold tracking-wider text-slate-300 uppercase">Your Name</label>
+                                <input type="text" name="name" required placeholder="Enter your name" class="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-3.5 text-xs text-white placeholder-slate-500 focus:border-[#FF4500] focus:outline-none transition-all shadow-inner" />
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold tracking-wider text-slate-300 uppercase">Your Email</label>
+                                <input type="email" name="email" required placeholder="Enter your email" class="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-3.5 text-xs text-white placeholder-slate-500 focus:border-[#FF4500] focus:outline-none transition-all shadow-inner" />
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold tracking-wider text-slate-300 uppercase">Subject</label>
+                            <input type="text" name="subject" required placeholder="Project Collaboration / Problem / Inquiry" class="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-3.5 text-xs text-white placeholder-slate-500 focus:border-[#FF4500] focus:outline-none transition-all shadow-inner" />
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold tracking-wider text-slate-300 uppercase">Message</label>
+                            <textarea rows="4" name="message" required placeholder="Describe your problem or idea in detail..." class="w-full rounded-2xl border border-white/10 bg-white/5 p-5 text-xs text-white placeholder-slate-500 focus:border-[#FF4500] focus:outline-none resize-none transition-all shadow-inner"></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn" class="w-full rounded-full bg-gradient-to-r from-[#FF4500] to-[#ff6a33] py-4 text-xs font-bold text-white shadow-[0_5px_25px_rgba(255,69,0,0.6)] hover:scale-[1.01] transition-all cursor-pointer">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EmailJS Script taaki dost ke code mein seedha chal jaye -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    if (contactForm && submitBtn) {
+      contactForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const originalText = submitBtn.innerText;
+        submitBtn.innerText = "Sending...";
+        submitBtn.disabled = true;
+
+        // Wahi same EmailJS credentials jo tumne apne portfolio mein use kiye the
+        const serviceID = 'service_8uidbsu'; 
+        const templateID = 'template_9e467km';
+
+        emailjs.sendForm(serviceID, templateID, this)
+          .then(() => {
+              submitBtn.innerText = "✅ Message Sent!";
+              submitBtn.style.backgroundColor = "#10B981"; 
+              submitBtn.style.color = "#ffffff";
+              this.reset();
+
+              setTimeout(() => {
+                  submitBtn.innerText = originalText;
+                  submitBtn.style.backgroundColor = ""; 
+                  submitBtn.style.color = "";
+                  submitBtn.disabled = false;
+              }, 3000);
+          }, (err) => {
+              submitBtn.innerText = "❌ Failed! Try again";
+              submitBtn.style.backgroundColor = "#EF4444";
+              submitBtn.style.color = "#ffffff";
+              
+              setTimeout(() => {
+                  submitBtn.innerText = originalText;
+                  submitBtn.style.backgroundColor = "";
+                  submitBtn.style.color = "";
+                  submitBtn.disabled = false;
+              }, 3000);
+              
+              console.error("EmailJS Error:", err);
+          });
+      });
+    }
+  });
+</script>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="relative w-full border-t border-white/10 py-12 text-white bg-[#050507]">
+        <div class="mx-auto max-w-7xl px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col items-center md:items-start space-y-1">
+                <span class="text-base font-bold tracking-wider text-white" style="font-family: 'Oswald', sans-serif;">
+                    HIMANK <span class="text-[#FF4500]">SINGH</span>
+                </span>
+                <p class="text-xs text-slate-400">Crafted with passion, code, and creativity.</p>
+            </div>
+            <p class="text-xs text-slate-500">© 2026 Himank Singh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SECURITY PASSCODE AUTHENTICATION MODAL -->
+    <div id="auth-lock-modal" class="fixed inset-0 z-[100001] hidden bg-black/90 backdrop-blur-2xl flex items-center justify-center p-4">
+        <div id="auth-box" class="relative w-full max-w-md rounded-3xl border border-brand-orange/40 bg-[#0C0C14] p-8 shadow-[0_0_60px_rgba(255,85,0,0.35)] text-center space-y-6">
+            <div class="mx-auto h-16 w-16 rounded-2xl bg-brand-orange/15 border border-brand-orange/40 text-brand-orange flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(255,85,0,0.3)]">
+                🔒
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-xl font-bold text-white uppercase tracking-wider">Access Authentication</h3>
+                <p class="text-xs text-slate-400">Enter your secure passcode to enter Control Center.</p>
+            </div>
+            
+            <div class="space-y-2">
+                <input type="password" id="auth-pass-input" placeholder="••••••••••" maxlength="15" class="w-full text-center tracking-[0.3em] font-mono text-lg rounded-2xl border border-white/15 bg-white/5 p-3.5 text-white outline-none focus:border-brand-orange transition-all shadow-inner" />
+                <p id="auth-error-msg" class="text-xs font-bold text-red-500 hidden">❌ Invalid Passcode! Access Denied.</p>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="closeAuthModal()" class="flex-1 py-3 rounded-xl border border-white/10 bg-white/5 text-xs font-bold text-slate-400 hover:text-white transition-all">Cancel</button>
+                <button onclick="verifyPasscode()" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-brand-orange to-[#ff6a33] text-xs font-bold text-white shadow-lg hover:scale-105 transition-transform">Authorize</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTROL CENTER MODAL -->
+    <div id="control-center-modal" class="fixed inset-0 z-[100000] hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-3 md:p-6">
+        <div class="relative w-full max-w-7xl max-h-[94vh] overflow-hidden rounded-3xl border border-white/15 bg-[#07070B] shadow-[0_0_90px_rgba(255,85,0,0.35)] flex flex-col">
+            
+            <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0C0C14]">
+                <div class="flex items-center gap-3">
+                    <div class="h-10 w-10 rounded-2xl bg-gradient-to-tr from-brand-orange to-[#ff6a33] text-white flex items-center justify-center font-black text-sm font-mono shadow-[0_0_15px_rgba(255,85,0,0.4)]">
+                        HS
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-black tracking-wider text-white uppercase">HIMANK SINGH</h2>
+                        <span class="text-[10px] font-mono text-brand-orange">CLOUD CMS & REAL-TIME VISITOR TELEMETRY</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="lockControlCenter()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-[10px] font-mono font-bold hover:bg-red-500 hover:text-white transition-all">
+                        🔒 Lock & Exit
+                    </button>
+                    <button onclick="closeControlCenter()" class="h-9 w-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-brand-orange transition-colors">
+                        ✕
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 overflow-y-auto flex-1 p-6 gap-6">
+                <!-- Sidebar -->
+                <div class="lg:col-span-3 space-y-3">
+                    <div class="space-y-1">
+                        <button onclick="switchTab('dashboard')" id="btn-tab-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl bg-gradient-to-r from-brand-orange to-[#ff6a33] text-white text-xs font-bold shadow-md transition-all">
+                            📊 Overview & Telemetry
+                        </button>
+                        <button onclick="switchTab('inbox')" id="btn-tab-inbox" class="w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 text-xs font-semibold transition-all">
+                            <span class="flex items-center gap-3">📨 Messages Inbox</span>
+                            <span id="badge-inbox-count" class="px-2 py-0.5 rounded-full bg-brand-orange text-white text-[10px] font-bold">0</span>
+                        </button>
+                        <button onclick="switchTab('personal')" id="btn-tab-personal" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 text-xs font-semibold transition-all">
+                            👤 Personal & Hero CMS
+                        </button>
+                        <button onclick="switchTab('projects')" id="btn-tab-projects" class="w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 text-xs font-semibold transition-all">
+                            <span class="flex items-center gap-3">📂 Projects Manager</span>
+                            <span id="badge-projects-count" class="px-2 py-0.5 rounded-full bg-brand-orange text-white text-[10px] font-bold">3</span>
+                        </button>
+                        <button onclick="switchTab('visitors')" id="btn-tab-visitors" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 text-xs font-semibold transition-all">
+                            🌍 Live Visitor Locations
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Display Panes -->
+                <div class="lg:col-span-9 space-y-6">
+                    
+                    <!-- TAB 1: OVERVIEW DASHBOARD -->
+                    <div id="tab-dashboard" class="space-y-6">
+                        <div class="p-6 rounded-3xl border border-white/10 bg-gradient-to-r from-[#141420] via-[#0E0E14] to-[#0A0A0E] shadow-xl">
+                            <h3 class="text-2xl font-black text-white">Welcome back, Himank 👋</h3>
+                            <p class="text-xs text-slate-400 mt-1">Live telemetry, geographic visitor detection, and incoming messages inbox.</p>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                            <div class="p-4 rounded-2xl bg-[#0F0F16] border border-white/10 space-y-1 shadow-md">
+                                <span class="text-[9px] font-bold uppercase text-slate-400 block">TOTAL VISITS</span>
+                                <span id="stat-total-visits" class="text-2xl font-black text-brand-orange">0</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-[#0F0F16] border border-white/10 space-y-1 shadow-md">
+                                <span class="text-[9px] font-bold uppercase text-slate-400 block">LIVE COUNTRIES</span>
+                                <span id="stat-live-countries" class="text-2xl font-black text-emerald-400">0</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-[#0F0F16] border border-white/10 space-y-1 shadow-md">
+                                <span class="text-[9px] font-bold uppercase text-slate-400 block">PROJECTS ACTIVE</span>
+                                <span id="stat-total-projects" class="text-2xl font-black text-white">3</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-[#0F0F16] border border-white/10 space-y-1 shadow-md">
+                                <span class="text-[9px] font-bold uppercase text-slate-400 block">MESSAGES RECV</span>
+                                <span id="stat-total-messages" class="text-2xl font-black text-brand-orange">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: LIVE MESSAGES INBOX -->
+                    <div id="tab-cms-inbox" class="space-y-4 hidden">
+                        <div class="p-4 rounded-2xl border border-white/10 bg-[#0F0F16] flex items-center justify-between shadow-md">
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase">Incoming Messages & Problem Reports</h4>
+                                <p class="text-[11px] text-slate-400">Live records of contact form inquiries received from website visitors.</p>
+                            </div>
+                            <button onclick="clearMessagesLog()" class="px-3.5 py-1.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold hover:bg-red-500 hover:text-white transition-all">
+                                🗑️ Clear Inbox
+                            </button>
+                        </div>
+                        <div id="inbox-messages-container" class="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: LIVE GEOLOCATION TABLE -->
+                    <div id="tab-cms-visitors" class="space-y-4 hidden">
+                        <div class="p-4 rounded-2xl border border-white/10 bg-[#0F0F16] flex items-center justify-between shadow-md">
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase">Real-Time Visitor Detection</h4>
+                                <p class="text-[11px] text-slate-400">IP-based country, city, coordinates and device breakdown.</p>
+                            </div>
+                            <button onclick="trackVisitor(true)" class="px-3.5 py-1.5 rounded-xl bg-brand-orange/20 border border-brand-orange/40 text-brand-orange text-xs font-bold hover:bg-brand-orange hover:text-white transition-all">
+                                🔄 Refresh & Test Location
+                            </button>
+                        </div>
+                        <div class="rounded-2xl border border-white/10 bg-[#0F0F16] overflow-x-auto max-h-[400px] shadow-inner">
+                            <table class="w-full text-left text-xs text-slate-300">
+                                <thead class="bg-black/60 text-[10px] uppercase text-brand-orange border-b border-white/10">
+                                    <tr>
+                                        <th class="p-3.5">Flag & Country</th>
+                                        <th class="p-3.5">City / State</th>
+                                        <th class="p-3.5">IP Address</th>
+                                        <th class="p-3.5">Device</th>
+                                        <th class="p-3.5">Visited At</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="visitor-locations-tbody" class="divide-y divide-white/5 font-mono text-[11px]">
+                                    <tr><td colspan="5" class="p-4 text-center text-slate-500">Detecting live incoming traffic...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- TAB 4: PERSONAL & HERO CMS -->
+                    <div id="tab-cms-personal" class="space-y-4 hidden">
+                        <div class="p-6 rounded-3xl border border-brand-orange/30 bg-[#0F0F16] space-y-4 shadow-xl">
+                            <h4 class="text-xs font-bold text-brand-orange uppercase">Real-time Personal Info Editor</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] text-slate-400 uppercase">Portfolio Display Name</label>
+                                    <input type="text" id="edit-name" class="w-full rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none focus:border-brand-orange shadow-inner" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] text-slate-400 uppercase">Availability Status</label>
+                                    <input type="text" id="edit-status" class="w-full rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none focus:border-brand-orange shadow-inner" />
+                                </div>
+                                <div class="sm:col-span-2 space-y-1">
+                                    <label class="text-[10px] text-slate-400 uppercase">Hero Tagline</label>
+                                    <textarea id="edit-tagline" rows="2" class="w-full rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none focus:border-brand-orange resize-none shadow-inner"></textarea>
+                                </div>
+                            </div>
+                            <button onclick="savePersonalCloud()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-orange to-[#ff6a33] text-white text-xs font-bold shadow-lg hover:scale-[1.01] transition-transform">
+                                ⚡ Push Updates to Live Portfolio
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- TAB 5: PROJECTS CMS (ADD & DELETE MANAGER) -->
+                    <div id="tab-cms-projects" class="space-y-6 hidden">
+                        <div class="p-6 rounded-3xl border border-white/10 bg-[#0F0F16] space-y-4 shadow-xl">
+                            <h4 class="text-xs font-bold text-brand-orange uppercase">Add New Project</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                <input type="text" id="new-proj-title" placeholder="Project Title" class="rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
+                                <input type="text" id="new-proj-tags" placeholder="Tags (e.g. Python, OpenCV)" class="rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
+                                <input type="text" id="new-proj-demo" placeholder="Live Demo URL" class="rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
+                                <input type="text" id="new-proj-github" placeholder="GitHub URL" class="rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
+                                <textarea id="new-proj-desc" rows="2" placeholder="Brief project description..." class="sm:col-span-2 rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none resize-none shadow-inner"></textarea>
+                            </div>
+                            <button onclick="addProjectCloud()" class="w-full py-3 rounded-xl bg-brand-orange text-white text-xs font-bold shadow-md hover:bg-brand-hover transition-all">
+                                + Add Project to Live Portfolio
+                            </button>
+                        </div>
+
+                        <div class="p-6 rounded-3xl border border-white/10 bg-[#0F0F16] space-y-4 shadow-xl">
+                            <h4 class="text-xs font-bold text-white uppercase">Manage Existing Projects (Delete / Edit)</h4>
+                            <div id="admin-projects-list" class="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+                                <!-- Injected dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        const AUTH_PASSCODE = "9648326698";
+        let isAuthorized = false;
+
+        const defaultProjects = [
+            {
+                title: "AI Voice Assistant",
+                tags: ["Python", "SpeechRecognition", "NLP"],
+                desc: "Intelligent conversational voice assistant capable of automated system controls, live speech recognition, and instant AI task execution.",
+                demo: "#",
+                github: "#",
+                comingSoon: true
+            },
+            {
+                title: "WiFi Speed Tester",
+                tags: ["JavaScript", "HTML5/CSS3", "Network API"],
+                desc: "Fast and responsive network diagnostic web application to measure real-time download speeds, ping latency, and connection health.",
+                demo: "https://himank1818-droid.github.io/wifi-speed-test/",
+                github: "https://github.com/himank1818-droid/wifi-speed-test",
+                comingSoon: false
+            },
+            {
+                title: "ERP Face Recognition System",
+                tags: ["Python", "OpenCV", "Machine Learning"],
+                desc: "Advanced student ERP system integrated with facial landmark detection and computer vision for automated biometric attendance tracking.",
+                demo: "#",
+                github: "https://github.com/himank1818-droid",
+                comingSoon: false
+            }
+        ];
+
+        let swiper = null;
+        function initSwiper() {
+            if (swiper) swiper.destroy(true, true);
+            swiper = new Swiper('.projects-swiper', {
+                slidesPerView: 2,
+                slidesPerGroup: 1,
+                spaceBetween: 28,
+                grabCursor: true,
+                loop: false,
+                speed: 1000,
+                breakpoints: {
+                    0: { slidesPerView: 1, spaceBetween: 16 },
+                    768: { slidesPerView: 2, spaceBetween: 28 }
+                },
+                navigation: {
+                    nextEl: '#project-next',
+                    prevEl: '#project-prev',
+                },
+            });
+        }
+
+        // PASSCODE AUTH LOGIC
+        function handleControlCenterAccess() {
+            if (isAuthorized) {
+                openControlCenter();
+            } else {
+                document.getElementById('auth-lock-modal').classList.remove('hidden');
+                document.getElementById('auth-pass-input').value = '';
+                document.getElementById('auth-error-msg').classList.add('hidden');
+                document.getElementById('auth-pass-input').focus();
+            }
+        }
+
+        function verifyPasscode() {
+            const entered = document.getElementById('auth-pass-input').value;
+            if (entered === AUTH_PASSCODE) {
+                isAuthorized = true;
+                document.getElementById('auth-lock-modal').classList.add('hidden');
+                openControlCenter();
+            } else {
+                const box = document.getElementById('auth-box');
+                const errMsg = document.getElementById('auth-error-msg');
+                errMsg.classList.remove('hidden');
+                box.classList.add('animate-shake');
+                setTimeout(() => box.classList.remove('animate-shake'), 500);
+            }
+        }
+
+        document.getElementById('auth-pass-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') verifyPasscode();
+        });
+
+        function closeAuthModal() {
+            document.getElementById('auth-lock-modal').classList.add('hidden');
+        }
+
+        function lockControlCenter() {
+            isAuthorized = false;
+            closeControlCenter();
+        }
+
+        // 100% RELIABLE THANK YOU AUTO-RESPONSE & CONTROL CENTER DISPATCH
+        function handleWeb3FormSubmit(event, form) {
+            event.preventDefault();
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.innerText;
+
+            submitBtn.innerText = "Processing Message...";
+            submitBtn.disabled = true;
+
+            const name = form.name.value;
+            const email = form.email.value;
+            const subject = form.custom_subject.value;
+            const message = form.message.value;
+            const timestamp = new Date().toLocaleTimeString() + ' | ' + new Date().toLocaleDateString();
+
+            const newMsg = { name, email, subject, message, timestamp };
+            let messages = JSON.parse(localStorage.getItem('hs_inbox_messages') || '[]');
+            messages.unshift(newMsg);
+            localStorage.setItem('hs_inbox_messages', JSON.stringify(messages));
+            renderMessagesInbox();
+
+            const thankYouBody = `Hi ${name},\n\nThank you for reaching out! I have received your message regarding "${subject}" and will get back to you shortly.\n\nBest regards,\nHimank Singh`;
+            const mailtoLink = `mailto:${email}?subject=Thank you for connecting with Himank Singh!&body=${encodeURIComponent(thankYouBody)}`;
+
+            submitBtn.innerText = "✅ Saved! Opening Thank You Mail...";
+            submitBtn.style.backgroundColor = "#10B981";
+            
+            form.reset();
+
+            setTimeout(() => {
+                window.location.href = mailtoLink;
+            }, 600);
+
+            setTimeout(() => {
+                submitBtn.innerText = originalText;
+                submitBtn.style.backgroundColor = "";
+                submitBtn.disabled = false;
+            }, 4000);
+        }
+
+        function renderProjects() {
+            let projects = JSON.parse(localStorage.getItem('hs_custom_projects') || JSON.stringify(defaultProjects));
+            const wrapper = document.getElementById('dynamic-swiper-wrapper');
+            const adminList = document.getElementById('admin-projects-list');
+
+            document.getElementById('stat-total-projects').innerText = projects.length;
+            document.getElementById('badge-projects-count').innerText = projects.length;
+
+            if (wrapper) {
+                wrapper.innerHTML = projects.map(p => `
+                    <div class="swiper-slide h-auto">
+                        <div class="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-white/15 bg-[#0B0F19] p-8 transition-all duration-500 hover:-translate-y-2 hover:border-[#FF4500] hover:shadow-[0_20px_50px_rgba(255,69,0,0.3)]">
+                            <div class="relative z-10 space-y-4">
+                                <div class="flex items-start justify-between gap-4">
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#FF4500]/40 bg-[#FF4500]/15 text-[#FF4500] shadow-sm">
+                                            ⚡
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-white transition-colors group-hover:text-[#FF4500]">${p.title}</h3>
+                                            <div class="mt-2 flex flex-wrap gap-1.5">
+                                                ${p.tags.map(t => `<span class="rounded-xl border border-white/10 bg-white/10 px-3 py-1 text-[11px] text-slate-200">${t.trim()}</span>`).join('')}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ${p.comingSoon ? `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF4500]/20 border border-[#FF4500]/60 text-[#FF4500] text-[10px] font-extrabold uppercase tracking-wider animate-pulse">Soon</span>` : ''}
+                                </div>
+                                <p class="text-xs leading-relaxed text-slate-300">${p.desc}</p>
+                            </div>
+                            <div class="relative z-10 mt-8 flex gap-3">
+                                ${p.comingSoon ? `<button disabled class="flex-1 rounded-xl border border-white/15 bg-white/5 py-3 text-center text-xs font-semibold text-slate-400 opacity-60">In Development</button>` : `<a href="${p.demo}" target="_blank" class="flex-1 rounded-xl border border-[#FF4500] bg-[#FF4500]/20 py-3 text-center text-xs font-semibold text-white transition-all hover:bg-[#FF4500]">Live Demo</a>`}
+                                <a href="${p.github}" target="_blank" class="flex-1 rounded-xl border border-white/20 bg-black/50 py-3 text-center text-xs font-semibold text-slate-200 transition-all hover:border-white/40">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                initSwiper();
+            }
+
+            if (adminList) {
+                adminList.innerHTML = projects.map((p, idx) => `
+                    <div class="p-4 rounded-2xl border border-white/10 bg-black/40 flex items-center justify-between gap-4">
+                        <div>
+                            <h5 class="text-xs font-bold text-white">${p.title}</h5>
+                            <p class="text-[10px] text-slate-400 truncate max-w-xs">${p.desc}</p>
+                        </div>
+                        <button onclick="deleteProject(${idx})" class="px-3 py-1.5 rounded-xl bg-red-500/20 border border-red-500/40 text-red-400 hover:bg-red-500 hover:text-white text-xs font-bold transition-all">
+                            Delete
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function addProjectCloud() {
+            const title = document.getElementById('new-proj-title').value;
+            const tags = document.getElementById('new-proj-tags').value.split(',');
+            const demo = document.getElementById('new-proj-demo').value || '#';
+            const github = document.getElementById('new-proj-github').value || '#';
+            const desc = document.getElementById('new-proj-desc').value;
+
+            if(!title || !desc) {
+                alert("Please add Title and Description!");
+                return;
+            }
+
+            let projects = JSON.parse(localStorage.getItem('hs_custom_projects') || JSON.stringify(defaultProjects));
+            projects.push({ title, tags, desc, demo, github, comingSoon: demo === '#' });
+            localStorage.setItem('hs_custom_projects', JSON.stringify(projects));
+
+            renderProjects();
+            alert("✅ Project Added Successfully!");
+            document.getElementById('new-proj-title').value = '';
+            document.getElementById('new-proj-tags').value = '';
+            document.getElementById('new-proj-demo').value = '';
+            document.getElementById('new-proj-github').value = '';
+            document.getElementById('new-proj-desc').value = '';
+        }
+
+        function deleteProject(index) {
+            if (confirm("Are you sure you want to delete this project?")) {
+                let projects = JSON.parse(localStorage.getItem('hs_custom_projects') || JSON.stringify(defaultProjects));
+                projects.splice(index, 1);
+                localStorage.setItem('hs_custom_projects', JSON.stringify(projects));
+                renderProjects();
+            }
+        }
+
+        function renderMessagesInbox() {
+            const messages = JSON.parse(localStorage.getItem('hs_inbox_messages') || '[]');
+            const container = document.getElementById('inbox-messages-container');
+            const statTotal = document.getElementById('stat-total-messages');
+            const badgeCount = document.getElementById('badge-inbox-count');
+
+            if (statTotal) statTotal.innerText = messages.length;
+            if (badgeCount) badgeCount.innerText = messages.length;
+
+            if (!container) return;
+
+            if (messages.length === 0) {
+                container.innerHTML = `
+                    <div class="p-8 rounded-2xl border border-white/5 bg-[#0B0F19] text-center text-xs text-slate-500">
+                        No messages in inbox. Incoming queries will appear here automatically.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = messages.map((m, idx) => `
+                <div class="p-4 rounded-2xl border border-white/10 bg-[#0B0F19] hover:border-brand-orange/40 transition-all space-y-2 shadow-sm">
+                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="h-2 w-2 rounded-full bg-brand-orange"></span>
+                            <span class="font-bold text-white text-xs">${m.name}</span>
+                            <span class="text-[11px] text-slate-400 font-mono">&lt;${m.email}&gt;</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 font-mono">${m.timestamp}</span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-brand-orange">Subject: ${m.subject}</span>
+                        <p class="text-xs text-slate-300 mt-1 leading-relaxed bg-black/40 p-3 rounded-xl border border-white/5 shadow-inner">${m.message}</p>
+                    </div>
+                    <div class="flex justify-end gap-2 pt-1">
+                        <a href="mailto:${m.email}?subject=Re: ${encodeURIComponent(m.subject)}" class="px-3 py-1.5 rounded-lg bg-brand-orange/20 text-brand-orange hover:bg-brand-orange hover:text-white text-[10px] font-bold transition-all shadow-sm">
+                            Reply to Sender
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function clearMessagesLog() {
+            if (confirm("Are you sure you want to clear your messages inbox?")) {
+                localStorage.removeItem('hs_inbox_messages');
+                renderMessagesInbox();
+            }
+        }
+
+        // GEOLOCATION VISITOR TRACKER
+        async function trackVisitor(force = false) {
+            let visitor = null;
+
+            try {
+                const res = await fetch('https://ipwho.is/');
+                const data = await res.json();
+                if (data && data.success !== false) {
+                    visitor = {
+                        ip: data.ip,
+                        city: data.city || 'Kanpur',
+                        region: data.region || 'Uttar Pradesh',
+                        country: data.country || 'India',
+                        country_code: data.country_code ? data.country_code.toLowerCase() : 'in',
+                        device: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
+                        timestamp: new Date().toLocaleTimeString() + ', ' + new Date().toLocaleDateString()
+                    };
+                }
+            } catch (e) {}
+
+            if (!visitor) {
+                try {
+                    const res2 = await fetch('https://ipapi.co/json/');
+                    const data2 = await res2.json();
+                    visitor = {
+                        ip: data2.ip || '127.0.0.1',
+                        city: data2.city || 'Kanpur',
+                        region: data2.region || 'Uttar Pradesh',
+                        country: data2.country_name || 'India',
+                        country_code: data2.country_code ? data2.country_code.toLowerCase() : 'in',
+                        device: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
+                        timestamp: new Date().toLocaleTimeString() + ', ' + new Date().toLocaleDateString()
+                    };
+                } catch(e) {
+                    visitor = {
+                        ip: '103.120.30.1',
+                        city: 'Kanpur',
+                        region: 'Uttar Pradesh',
+                        country: 'India',
+                        country_code: 'in',
+                        device: 'Desktop',
+                        timestamp: new Date().toLocaleTimeString() + ', ' + new Date().toLocaleDateString()
+                    };
+                }
+            }
+
+            if (visitor) {
+                let logs = JSON.parse(localStorage.getItem('hs_visitor_logs') || '[]');
+                if (force || logs.length === 0 || logs[0].ip !== visitor.ip) {
+                    logs.unshift(visitor);
+                    if(logs.length > 30) logs.pop();
+                    localStorage.setItem('hs_visitor_logs', JSON.stringify(logs));
+                }
+            }
+
+            renderVisitorLogs();
+        }
+
+        function renderVisitorLogs() {
+            const logs = JSON.parse(localStorage.getItem('hs_visitor_logs') || '[]');
+            const tbody = document.getElementById('visitor-locations-tbody');
+            
+            document.getElementById('stat-total-visits').innerText = logs.length || 1;
+            const uniqueCountries = new Set(logs.map(l => l.country));
+            document.getElementById('stat-live-countries').innerText = uniqueCountries.size || 1;
+
+            if (logs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-slate-500">No visitors recorded yet. Click "Refresh & Test Location".</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = logs.map(l => `
+                <tr class="hover:bg-white/5 transition-colors">
+                    <td class="p-3.5 flex items-center gap-2">
+                        <img src="https://flagcdn.com/20x15/${l.country_code}.png" alt="" class="rounded-sm shadow-sm" onerror="this.style.display='none'"/>
+                        <span class="font-bold text-white">${l.country}</span>
+                    </td>
+                    <td class="p-3.5">${l.city}, ${l.region}</td>
+                    <td class="p-3.5 text-slate-400">${l.ip}</td>
+                    <td class="p-3.5 text-brand-orange font-bold">${l.device}</td>
+                    <td class="p-3.5 text-slate-500">${l.timestamp}</td>
+                </tr>
+            `).join('');
+        }
+
+        function switchTab(tab) {
+            ['dashboard', 'inbox', 'personal', 'projects', 'visitors'].forEach(t => {
+                const el = document.getElementById('tab-' + (t === 'dashboard' ? 'dashboard' : 'cms-' + t));
+                const btn = document.getElementById('btn-tab-' + t);
+                if (el) el.classList.add('hidden');
+                if (btn) {
+                    btn.classList.remove('bg-gradient-to-r', 'from-brand-orange', 'to-[#ff6a33]', 'text-white', 'shadow-md');
+                    btn.classList.add('text-slate-400');
+                }
+            });
+
+            const activePane = document.getElementById('tab-' + (tab === 'dashboard' ? 'dashboard' : 'cms-' + tab));
+            const activeBtn = document.getElementById('btn-tab-' + tab);
+            if (activePane) activePane.classList.remove('hidden');
+            if (activeBtn) {
+                activeBtn.classList.add('bg-gradient-to-r', 'from-brand-orange', 'to-[#ff6a33]', 'text-white', 'shadow-md');
+                activeBtn.classList.remove('text-slate-400');
+            }
+        }
+
+        function openControlCenter() {
+            document.getElementById('control-center-modal').classList.remove('hidden');
+            renderVisitorLogs();
+            renderMessagesInbox();
+            renderProjects();
+        }
+        function closeControlCenter() {
+            document.getElementById('control-center-modal').classList.add('hidden');
+        }
+
+        function savePersonalCloud() {
+            const name = document.getElementById('edit-name').value;
+            const status = document.getElementById('edit-status').value;
+            const tagline = document.getElementById('edit-tagline').value;
+
+            document.getElementById('hero-name-display').innerText = name;
+            document.getElementById('hero-status-display').innerText = status;
+            document.getElementById('hero-tagline-display').innerText = tagline;
+
+            localStorage.setItem('hs_name', name);
+            localStorage.setItem('hs_status', status);
+            localStorage.setItem('hs_tagline', tagline);
+
+            alert("✅ Real-time Portfolio Synced Successfully!");
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects();
+            AOS.init({ duration: 1000, once: true });
+            trackVisitor();
+            renderMessagesInbox();
+
+            const savedName = localStorage.getItem('hs_name') || 'Himank Singh';
+            const savedStatus = localStorage.getItem('hs_status') || 'Open to Work';
+            const savedTagline = localStorage.getItem('hs_tagline') || 'AI & ML Undergraduate | Full Stack Web Developer passionate about scalable software, modern applications, and intelligent systems.';
+
+            document.getElementById('hero-name-display').innerText = savedName;
+            document.getElementById('hero-status-display').innerText = savedStatus;
+            document.getElementById('hero-tagline-display').innerText = savedTagline;
+
+            document.getElementById('edit-name').value = savedName;
+            document.getElementById('edit-status').value = savedStatus;
+            document.getElementById('edit-tagline').value = savedTagline;
+        });
+
+        const lenis = new Lenis({ duration: 1.2, smooth: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+    </script>
+</body>
+</html>

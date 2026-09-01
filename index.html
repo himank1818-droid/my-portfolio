@@ -121,7 +121,7 @@
                 <span class="h-2 w-2 rounded-full bg-brand-orange animate-ping"></span>
             </a>
 
-            <nav class="hidden md:flex items-center space-x-1.5 text-sm font-semibold tracking-wide text-slate-300" data-aos-delay="300" data-aos="fade-down">
+            <nav class="flex items-center space-x-1.5 text-sm font-semibold tracking-wide text-slate-300" data-aos-delay="300" data-aos="fade-down">
                 <a href="#about" class="px-4 py-2 rounded-full border border-transparent hover:border-brand-orange/50 hover:bg-brand-orange/10 hover:text-white transition-all duration-300">About Me</a>
                 <a href="#education" class="px-4 py-2 rounded-full border border-transparent hover:border-brand-orange/50 hover:bg-brand-orange/10 hover:text-white transition-all duration-300">Education</a>
                 <a href="#skills" class="px-4 py-2 rounded-full border border-transparent hover:border-brand-orange/50 hover:bg-brand-orange/10 hover:text-white transition-all duration-300">Skills</a>
@@ -558,7 +558,7 @@
         </div>
     </footer>
 
-    <!-- SECURITY PASSCODE AUTHENTICATION MODAL (SHA-256 Hashed Protection) -->
+    <!-- SECURITY PASSCODE AUTHENTICATION MODAL -->
     <div id="auth-lock-modal" class="fixed inset-0 z-[100001] hidden bg-black/90 backdrop-blur-2xl flex items-center justify-center p-4">
         <div id="auth-box" class="relative w-full max-w-md rounded-3xl border border-brand-orange/40 bg-[#0C0C14] p-8 shadow-[0_0_60px_rgba(255,85,0,0.35)] text-center space-y-6">
             <div class="mx-auto h-16 w-16 rounded-2xl bg-brand-orange/15 border border-brand-orange/40 text-brand-orange flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(255,85,0,0.3)]">
@@ -762,7 +762,6 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        // Target SHA-256 Hash for the secure passcode 'COLLEGE11'
         const TARGET_HASH = "b9f939227572dca81315b67277609a6337aef5163edeb480ae401d293d4a0fc0";
         let isAuthorized = false;
 
@@ -814,7 +813,6 @@
             });
         }
 
-        // SECURE HASHING & PASSCODE AUTH LOGIC
         async function hashString(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -865,7 +863,6 @@
             closeControlCenter();
         }
 
-        // EMAILJS FORM SUBMISSION & LOCAL INBOX STORAGE
         function handleContactSubmit(event, form) {
             event.preventDefault();
             const submitBtn = document.getElementById('submit-btn');
@@ -1052,7 +1049,6 @@
             }
         }
 
-        // GEOLOCATION VISITOR TRACKER
         async function trackVisitor(force = false) {
             let visitor = null;
 

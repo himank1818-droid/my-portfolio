@@ -516,7 +516,7 @@
 
                     <div class="lg:col-span-7 flex flex-col transition-all duration-500 hover:-translate-y-2 hover:scale-[1.01]">
                         <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-[#141420] to-[#08080c] p-8 shadow-2xl backdrop-blur-xl">
-                            <form id="contact-form" class="relative z-10 space-y-5" onsubmit="handleContactSubmit(event, this)">
+                            <form id="contact-form" class="relative z-10 space-y-5">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                     <div class="space-y-2">
                                         <label class="text-xs font-semibold tracking-wider text-slate-300 uppercase">Your Name</label>
@@ -708,7 +708,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        const SECURE_KEY_HASH = "76b4a3c1e2f9d8"; // Secure Synchronous Token
+        const SECURE_KEY_HASH = "b979502919cf629bbbc079e0a6d1b7d7256158e0a35db4db53ae3c9325c95c89";
         let isAuthorized = false;
 
         const defaultProjects = [
@@ -759,15 +759,11 @@
             });
         }
 
-        // Secure Synchronous Hashing Function
-        function getSecureHash(str) {
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                const char = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash |= 0;
-            }
-            return Math.abs(hash).toString(16) + str.length.toString(16) + "9a";
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
         function handleControlCenterAccess() {
@@ -781,11 +777,11 @@
             }
         }
 
-        function verifyPasscode() {
+        async function verifyPasscode() {
             const entered = document.getElementById('auth-pass-input').value;
             if (!entered) return;
 
-            const hashedInput = getSecureHash(entered);
+            const hashedInput = await sha256(entered);
 
             if (hashedInput === SECURE_KEY_HASH) {
                 isAuthorized = true;

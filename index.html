@@ -745,6 +745,9 @@
         const SECURE_KEY_HASH = "58dc3a8f3e63996f4a903c065cbb047d1f160a6e1f76e42092733209e0c23ef7";
         const PBKDF2_ITERATIONS = 600000;
         const DEFAULT_TAGLINE = "Undergraduate Engineer | Full Stack Web Developer building high-performance applications, secure backend systems, and neural intelligence.";
+        function isValidTagline(value) {
+            return typeof value === 'string' && value.trim().length >= 10 && /[A-Za-z]/.test(value);
+        }
         const ADMIN_EMAIL = "himanksingh733@gmail.com";
         const ADMIN_UID = "HMHWics3SlXwk2R44AgGQZemwK22";
         const firebaseApp = firebase.initializeApp({
@@ -907,7 +910,7 @@
                 if (content.personal) {
                     localStorage.setItem('hs_name', content.personal.name || 'Himank Singh');
                     localStorage.setItem('hs_status', content.personal.status || 'Open to Work');
-                    if (content.personal.tagline && content.personal.tagline.trim()) {
+                    if (isValidTagline(content.personal.tagline)) {
                         localStorage.setItem('hs_tagline', content.personal.tagline.trim());
                     }
                     applyPersonalContent();
@@ -976,7 +979,8 @@
         function applyPersonalContent() {
             const name = localStorage.getItem('hs_name') || 'Himank Singh';
             const status = localStorage.getItem('hs_status') || 'Open to Work';
-            const tagline = localStorage.getItem('hs_tagline') || DEFAULT_TAGLINE;
+            const storedTagline = localStorage.getItem('hs_tagline');
+            const tagline = isValidTagline(storedTagline) ? storedTagline : DEFAULT_TAGLINE;
             const nameDisplay = document.getElementById('hero-name-display');
             const statusDisplay = document.getElementById('hero-status-display');
             const taglineDisplay = document.getElementById('hero-tagline-display');
@@ -997,7 +1001,7 @@
                 status: document.getElementById('cms-status').value.trim(),
                 tagline: document.getElementById('cms-tagline').value.trim()
             };
-            if (!personal.name || !personal.tagline) { alert('Name and description are required.'); return; }
+            if (!personal.name || !isValidTagline(personal.tagline)) { alert('Please enter a real description (at least 10 characters).'); return; }
             localStorage.setItem('hs_name', personal.name);
             localStorage.setItem('hs_status', personal.status || 'Open to Work');
             localStorage.setItem('hs_tagline', personal.tagline);

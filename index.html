@@ -865,7 +865,25 @@
                     localStorage.setItem('hs_cloud_files', JSON.stringify(content.files));
                     renderFilesList();
                 }
+                if (content.personal) {
+                    localStorage.setItem('hs_name', content.personal.name || 'Himank Singh');
+                    localStorage.setItem('hs_status', content.personal.status || 'Open to Work');
+                    localStorage.setItem('hs_tagline', content.personal.tagline || '');
+                    applyPersonalContent();
+                }
             }, error => console.error('Firebase sync listener failed:', error));
+        }
+
+        function applyPersonalContent() {
+            const name = localStorage.getItem('hs_name') || 'Himank Singh';
+            const status = localStorage.getItem('hs_status') || 'Open to Work';
+            const tagline = localStorage.getItem('hs_tagline') || '';
+            const nameDisplay = document.getElementById('hero-name-display');
+            const statusDisplay = document.getElementById('hero-status-display');
+            const taglineDisplay = document.getElementById('hero-tagline-display');
+            if (nameDisplay) nameDisplay.innerText = name;
+            if (statusDisplay) statusDisplay.innerText = status;
+            if (taglineDisplay) taglineDisplay.innerText = tagline;
         }
 
         // FILES & FOLDERS MANAGER LOGIC

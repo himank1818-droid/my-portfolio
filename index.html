@@ -571,7 +571,7 @@
             </div>
             
             <div class="space-y-2">
-                <input type="password" id="auth-pass-input" placeholder="••••••••••" maxlength="15" class="w-full text-center tracking-[0.3em] font-mono text-lg rounded-2xl border border-white/15 bg-white/5 p-3.5 text-white outline-none focus:border-brand-orange transition-all shadow-inner" />
+                <input type="password" id="auth-pass-input" placeholder="Enter admin password" maxlength="128" autocomplete="current-password" class="w-full text-center tracking-[0.3em] font-mono text-lg rounded-2xl border border-white/15 bg-white/5 p-3.5 text-white outline-none focus:border-brand-orange transition-all shadow-inner" />
                 <p id="auth-error-msg" class="text-xs font-bold text-red-500 hidden">❌ Invalid Passcode! Access Denied.</p>
             </div>
 
@@ -600,7 +600,7 @@
                     <button onclick="lockControlCenter()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-[10px] font-mono font-bold hover:bg-red-500 hover:text-white transition-all">
                         🔒 Lock & Exit
                     </button>
-                    <button onclick="closeControlCenter()" class="h-9 w-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-brand-orange transition-colors">
+                    <button onclick="lockControlCenter()" class="h-9 w-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-brand-orange transition-colors">
                         ✕
                     </button>
                 </div>
@@ -704,13 +704,31 @@
     </div>
 
     <!-- Core Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        // BULLETPROOF SYNCHRONOUS HASH FOR 'ADITYA11'
-        const SECURE_KEY_HASH = "76b4a3c1e2f9d8";
+        const AUTH_SALT = "7b4f2c9a1d6e8f3052a7c9e4b6d1f083";
+        const SECURE_KEY_HASH = "58dc3a8f3e63996f4a903c065cbb047d1f160a6e1f76e42092733209e0c23ef7";
+        const PBKDF2_ITERATIONS = 600000;
+        const ADMIN_EMAIL = "himanksingh733@gmail.com";
+        const ADMIN_UID = "HMHWics3SlXwk2R44AgGQZemwK22";
+        const firebaseApp = firebase.initializeApp({
+            apiKey: "AIzaSyDOdBaO2B-zLhH5N_EC_KQNfbIwWktd_wk",
+            authDomain: "portfolio-a40b8.firebaseapp.com",
+            databaseURL: "https://portfolio-a40b8-default-rtdb.firebaseio.com",
+            projectId: "portfolio-a40b8",
+            storageBucket: "portfolio-a40b8.firebasestorage.app",
+            messagingSenderId: "615521467534",
+            appId: "1:615521467534:web:5349c9af667f59d0025ddf",
+            measurementId: "G-NJPLJ710BR"
+        });
+        const sharedContentRef = firebase.database(firebaseApp).ref('portfolio/content');
         let isAuthorized = false;
+        let authSessionTimer = null;
 
         const defaultProjects = [
             {
@@ -760,15 +778,24 @@
             });
         }
 
-        // Secure Synchronous Hashing Algorithm (100% reliable on all browsers & file://)
-        function getSecureHash(str) {
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                const char = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash |= 0;
+        async function derivePasswordHash(password) {
+            const passwordKey = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits']);
+            const hashBuffer = await crypto.subtle.deriveBits({
+                name: 'PBKDF2',
+                salt: new TextEncoder().encode(AUTH_SALT),
+                iterations: PBKDF2_ITERATIONS,
+                hash: 'SHA-256'
+            }, passwordKey, 256);
+            return Array.from(new Uint8Array(hashBuffer)).map(byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        function hashesMatch(expected, actual) {
+            if (expected.length !== actual.length) return false;
+            let difference = 0;
+            for (let index = 0; index < expected.length; index++) {
+                difference |= expected.charCodeAt(index) ^ actual.charCodeAt(index);
             }
-            return Math.abs(hash).toString(16) + str.length.toString(16) + "9a";
+            return difference === 0;
         }
 
         function handleControlCenterAccess() {
@@ -782,22 +809,29 @@
             }
         }
 
-        function verifyPasscode() {
+        async function verifyPasscode() {
             const entered = document.getElementById('auth-pass-input').value;
             if (!entered) return;
 
-            const hashedInput = getSecureHash(entered);
-
-            if (hashedInput === SECURE_KEY_HASH) {
-                isAuthorized = true;
-                document.getElementById('auth-lock-modal').classList.add('hidden');
-                openControlCenter();
-            } else {
-                const box = document.getElementById('auth-box');
+            if (!hashesMatch(SECURE_KEY_HASH, await derivePasswordHash(entered))) {
                 const errMsg = document.getElementById('auth-error-msg');
                 errMsg.classList.remove('hidden');
-                box.classList.add('animate-shake');
-                setTimeout(() => box.classList.remove('animate-shake'), 500);
+                return;
+            }
+
+            try {
+                const credential = await firebase.auth().signInWithEmailAndPassword(ADMIN_EMAIL, entered);
+                if (credential.user.uid !== ADMIN_UID) {
+                    await firebase.auth().signOut();
+                    throw new Error('Unauthorized admin account');
+                }
+                isAuthorized = true;
+                authSessionTimer = setTimeout(lockControlCenter, 15 * 60 * 1000);
+                document.getElementById('auth-lock-modal').classList.add('hidden');
+                openControlCenter();
+            } catch (error) {
+                console.error('Firebase authentication failed:', error);
+                document.getElementById('auth-error-msg').classList.remove('hidden');
             }
         }
 
@@ -811,7 +845,27 @@
 
         function lockControlCenter() {
             isAuthorized = false;
+            if (authSessionTimer) clearTimeout(authSessionTimer);
             closeControlCenter();
+        }
+
+        function saveSharedContent(content) {
+            return sharedContentRef.update(content);
+        }
+
+        function startSharedContentSync() {
+            sharedContentRef.on('value', snapshot => {
+                const content = snapshot.val();
+                if (!content) return;
+                if (content.projects) {
+                    localStorage.setItem('hs_custom_projects', JSON.stringify(content.projects));
+                    renderProjects();
+                }
+                if (content.files) {
+                    localStorage.setItem('hs_cloud_files', JSON.stringify(content.files));
+                    renderFilesList();
+                }
+            }, error => console.error('Firebase sync listener failed:', error));
         }
 
         // FILES & FOLDERS MANAGER LOGIC
@@ -855,6 +909,7 @@
             let files = JSON.parse(localStorage.getItem('hs_cloud_files') || '[]');
             files.push({ name, type, link });
             localStorage.setItem('hs_cloud_files', JSON.stringify(files));
+            saveSharedContent({ files }).catch(error => console.error('File sync failed:', error));
 
             renderFilesList();
             alert("✅ File/Folder Added Successfully!");
@@ -867,6 +922,7 @@
                 let files = JSON.parse(localStorage.getItem('hs_cloud_files') || '[]');
                 files.splice(index, 1);
                 localStorage.setItem('hs_cloud_files', JSON.stringify(files));
+                saveSharedContent({ files }).catch(error => console.error('File sync failed:', error));
                 renderFilesList();
             }
         }
@@ -939,6 +995,7 @@
             let projects = JSON.parse(localStorage.getItem('hs_custom_projects') || JSON.stringify(defaultProjects));
             projects.push({ title, tags, desc, demo, github, comingSoon: demo === '#' });
             localStorage.setItem('hs_custom_projects', JSON.stringify(projects));
+            saveSharedContent({ projects }).catch(error => console.error('Project sync failed:', error));
 
             renderProjects();
             alert("✅ Project Added Successfully!");
@@ -954,6 +1011,7 @@
                 let projects = JSON.parse(localStorage.getItem('hs_custom_projects') || JSON.stringify(defaultProjects));
                 projects.splice(index, 1);
                 localStorage.setItem('hs_custom_projects', JSON.stringify(projects));
+                saveSharedContent({ projects }).catch(error => console.error('Project sync failed:', error));
                 renderProjects();
             }
         }
@@ -986,6 +1044,7 @@
             if (confirm("Clear inbox?")) {
                 localStorage.removeItem('hs_inbox_messages');
                 renderMessagesInbox();
+                startSharedContentSync();
             }
         }
 

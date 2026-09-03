@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Himank Singh | Portfolio & Control Center</title>
     
+    <!-- Favicon Icon -->
     <link rel="icon" type="image/png" href="Images/favicon.png">
 
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -26,6 +28,7 @@
         }
     </script>
 
+    <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function(){
@@ -33,6 +36,7 @@
         })();
     </script>
 
+    <!-- Fonts & CDNs -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
@@ -109,6 +113,7 @@
 </head>
 <body class="bg-brand-black text-slate-100 antialiased selection:bg-brand-orange selection:text-white min-h-screen">
 
+    <!-- Header Navigation -->
     <header class="sticky top-0 z-50 bg-brand-black/85 backdrop-blur-xl border-b border-brand-border/60 w-full" data-aos="fade-down" data-aos-delay="100">
         <div class="w-full px-6 md:px-16 py-5 flex justify-between items-center">
             <a href="#" class="text-3xl md:text-4xl font-black tracking-wider text-white flex items-center gap-1.5" data-aos-delay="200" data-aos="fade-right">
@@ -126,6 +131,7 @@
             </nav>
 
             <div class="flex items-center gap-3" data-aos="fade-left" data-aos-delay="400">
+                <!-- Control Center Access Button -->
                 <button onclick="handleControlCenterAccess()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-[#14141f] border border-brand-orange/60 hover:bg-brand-orange text-brand-orange hover:text-white text-xs font-extrabold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(255,85,0,0.3)] hover:scale-105">
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                     <span>CONTROL CENTER</span>
@@ -140,6 +146,7 @@
     </header>
 
     <main class="w-full overflow-hidden">
+        <!-- Hero Section -->
         <section id="about" class="relative w-full min-h-[92vh] flex items-center pt-24 pb-20 text-white scroll-mt-24 cyber-grid" data-aos="fade" data-aos-delay="100">
             <div class="absolute inset-0 z-0 cyber-grid opacity-85"></div>
             <div class="absolute -top-32 -left-32 w-[480px] h-[480px] bg-brand-orange/30 rounded-full blur-[150px] pointer-events-none glow-pulse"></div>
@@ -217,6 +224,7 @@
             </div>
         </section>
 
+        <!-- Education Section -->
         <section id="education" class="scroll-mt-28 py-20 relative cyber-grid border-t border-white/10" data-aos="fade-up" data-aos-delay="100">
             <div class="absolute inset-0 cyber-grid opacity-60 pointer-events-none"></div>
             <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 space-y-10">
@@ -296,6 +304,7 @@
             </div>
         </section>
 
+        <!-- Technical Skills Section -->
         <section id="skills" class="py-20 scroll-mt-20 border-t border-white/10 relative cyber-grid">
             <div class="absolute inset-0 cyber-grid opacity-60 pointer-events-none"></div>
             <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
@@ -372,6 +381,7 @@
             </div>
         </section>
 
+        <!-- Coding Profiles Section -->
         <section id="coding-profiles" class="py-20 scroll-mt-20 border-t border-white/10 relative cyber-grid">
             <div class="absolute inset-0 cyber-grid opacity-60 pointer-events-none"></div>
             <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-12 space-y-10">
@@ -423,6 +433,7 @@
             </div>
         </section>
 
+        <!-- Projects Section -->
         <section id="projects" class="relative w-full py-20 text-white scroll-mt-24 cyber-grid border-t border-white/10">
             <div class="absolute inset-0 cyber-grid opacity-60 pointer-events-none"></div>
 
@@ -450,12 +461,14 @@
 
                     <div class="swiper projects-swiper overflow-hidden py-4 px-1">
                         <div class="swiper-wrapper" id="dynamic-swiper-wrapper">
-                            </div>
+                            <!-- Injected dynamically -->
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Contact Section -->
         <section id="contact" class="relative w-full pt-32 pb-24 text-white cyber-grid border-t border-white/10">
             <div class="absolute inset-0 cyber-grid opacity-60 pointer-events-none"></div>
 
@@ -533,6 +546,7 @@
         </section>
     </main>
 
+    <!-- Footer Section -->
     <footer class="relative w-full border-t border-white/10 py-12 text-white bg-[#050507]">
         <div class="mx-auto max-w-7xl px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex flex-col items-center md:items-start space-y-1">
@@ -545,6 +559,7 @@
         </div>
     </footer>
 
+    <!-- SECURE PASSCODE AUTHENTICATION MODAL -->
     <div id="auth-lock-modal" class="fixed inset-0 z-[100001] hidden bg-black/90 backdrop-blur-2xl flex items-center justify-center p-4">
         <div id="auth-box" class="relative w-full max-w-md rounded-3xl border border-brand-orange/40 bg-[#0C0C14] p-8 shadow-[0_0_60px_rgba(255,85,0,0.35)] text-center space-y-6">
             <div class="mx-auto h-16 w-16 rounded-2xl bg-brand-orange/15 border border-brand-orange/40 text-brand-orange flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(255,85,0,0.3)]">
@@ -567,6 +582,7 @@
         </div>
     </div>
 
+    <!-- CONTROL CENTER MODAL -->
     <div id="control-center-modal" class="fixed inset-0 z-[100000] hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-3 md:p-6">
         <div class="relative w-full max-w-7xl max-h-[94vh] overflow-hidden rounded-3xl border border-white/15 bg-[#07070B] shadow-[0_0_90px_rgba(255,85,0,0.35)] flex flex-col">
             
@@ -577,7 +593,7 @@
                     </div>
                     <div>
                         <h2 class="text-sm font-black tracking-wider text-white uppercase">HIMANK SINGH</h2>
-                        <span class="text-[10px] font-mono text-brand-orange">CLOUD CMS & REAL-TIME VISITOR TELEMETRY</span>
+                        <span class="text-[10px] font-mono text-brand-orange">CLOUD CMS & FILE/FOLDER MANAGER</span>
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
@@ -591,121 +607,77 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 overflow-y-auto flex-1 p-6 gap-6">
+                <!-- Sidebar -->
                 <div class="lg:col-span-3 space-y-3">
                     <div class="space-y-1">
                         <button onclick="switchTab('dashboard')" id="btn-tab-dashboard" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl bg-gradient-to-r from-brand-orange to-[#ff6a33] text-white text-xs font-bold shadow-md transition-all">
                             📊 Overview & Telemetry
                         </button>
+                        <button onclick="switchTab('files')" id="btn-tab-files" class="w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 text-xs font-semibold transition-all">
+                            <span class="flex items-center gap-3">📁 Files & Folders</span>
+                            <span id="badge-files-count" class="px-2 py-0.5 rounded-full bg-brand-orange text-white text-[10px] font-bold">0</span>
+                        </button>
                         <button onclick="switchTab('inbox')" id="btn-tab-inbox" class="w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 text-xs font-semibold transition-all">
                             <span class="flex items-center gap-3">📨 Messages Inbox</span>
                             <span id="badge-inbox-count" class="px-2 py-0.5 rounded-full bg-brand-orange text-white text-[10px] font-bold">0</span>
-                        </button>
-                        <button onclick="switchTab('personal')" id="btn-tab-personal" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 text-xs font-semibold transition-all">
-                            👤 Personal & Hero CMS
                         </button>
                         <button onclick="switchTab('projects')" id="btn-tab-projects" class="w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 text-xs font-semibold transition-all">
                             <span class="flex items-center gap-3">📂 Projects Manager</span>
                             <span id="badge-projects-count" class="px-2 py-0.5 rounded-full bg-brand-orange text-white text-[10px] font-bold">3</span>
                         </button>
-                        <button onclick="switchTab('visitors')" id="btn-tab-visitors" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 text-xs font-semibold transition-all">
-                            🌍 Live Visitor Locations
-                        </button>
                     </div>
                 </div>
 
+                <!-- Main Display Panes -->
                 <div class="lg:col-span-9 space-y-6">
                     
+                    <!-- TAB 1: OVERVIEW DASHBOARD -->
                     <div id="tab-dashboard" class="space-y-6">
                         <div class="p-6 rounded-3xl border border-white/10 bg-gradient-to-r from-[#141420] via-[#0E0E14] to-[#0A0A0E] shadow-xl">
                             <h3 class="text-2xl font-black text-white">Welcome back, Himank 👋</h3>
-                            <p class="text-xs text-slate-400 mt-1">Live telemetry, geographic visitor detection, and incoming messages inbox.</p>
+                            <p class="text-xs text-slate-400 mt-1">Manage your secure files, folders, projects, and contact inbox.</p>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: FILES & FOLDERS MANAGER -->
+                    <div id="tab-cms-files" class="space-y-6 hidden">
+                        <div class="p-6 rounded-3xl border border-white/10 bg-[#0F0F16] space-y-4 shadow-xl">
+                            <h4 class="text-xs font-bold text-brand-orange uppercase">Add New File / Folder</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                <input type="text" id="new-item-name" placeholder="File or Folder Name (e.g. certificates/)" class="rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
+                                <select id="new-item-type" class="rounded-xl border border-white/10 bg-[#0F0F16] p-3 text-white outline-none shadow-inner">
+                                    <option value="folder">📁 Folder</option>
+                                    <option value="file">📄 File</option>
+                                </select>
+                                <input type="text" id="new-item-link" placeholder="Direct Download / View URL (Optional)" class="sm:col-span-2 rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
+                            </div>
+                            <button onclick="addCloudItem()" class="w-full py-3 rounded-xl bg-brand-orange text-white text-xs font-bold shadow-md hover:bg-brand-hover transition-all">
+                                + Add to Cloud Storage
+                            </button>
                         </div>
 
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                            <div class="p-4 rounded-2xl bg-[#0F0F16] border border-white/10 space-y-1 shadow-md">
-                                <span class="text-[9px] font-bold uppercase text-slate-400 block">TOTAL VISITS</span>
-                                <span id="stat-total-visits" class="text-2xl font-black text-brand-orange">0</span>
-                            </div>
-                            <div class="p-4 rounded-2xl bg-[#0F0F16] border border-white/10 space-y-1 shadow-md">
-                                <span class="text-[9px] font-bold uppercase text-slate-400 block">LIVE COUNTRIES</span>
-                                <span id="stat-live-countries" class="text-2xl font-black text-emerald-400">0</span>
-                            </div>
-                            <div class="p-4 rounded-2xl bg-[#0F0F16] border border-white/10 space-y-1 shadow-md">
-                                <span class="text-[9px] font-bold uppercase text-slate-400 block">PROJECTS ACTIVE</span>
-                                <span id="stat-total-projects" class="text-2xl font-black text-white">3</span>
-                            </div>
-                            <div class="p-4 rounded-2xl bg-[#0F0F16] border border-white/10 space-y-1 shadow-md">
-                                <span class="text-[9px] font-bold uppercase text-slate-400 block">MESSAGES RECV</span>
-                                <span id="stat-total-messages" class="text-2xl font-black text-brand-orange">0</span>
+                        <div class="p-6 rounded-3xl border border-white/10 bg-[#0F0F16] space-y-4 shadow-xl">
+                            <h4 class="text-xs font-bold text-white uppercase">Existing Files & Folders</h4>
+                            <div id="admin-files-list" class="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+                                <!-- Injected dynamically -->
                             </div>
                         </div>
                     </div>
 
+                    <!-- TAB 3: MESSAGES INBOX -->
                     <div id="tab-cms-inbox" class="space-y-4 hidden">
                         <div class="p-4 rounded-2xl border border-white/10 bg-[#0F0F16] flex items-center justify-between shadow-md">
                             <div>
-                                <h4 class="text-xs font-bold text-white uppercase">Incoming Messages & Problem Reports</h4>
-                                <p class="text-[11px] text-slate-400">Live records of contact form inquiries received from website visitors.</p>
+                                <h4 class="text-xs font-bold text-white uppercase">Incoming Messages Inbox</h4>
                             </div>
                             <button onclick="clearMessagesLog()" class="px-3.5 py-1.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold hover:bg-red-500 hover:text-white transition-all">
                                 🗑️ Clear Inbox
                             </button>
                         </div>
-                        <div id="inbox-messages-container" class="space-y-3 max-h-[420px] overflow-y-auto pr-1">
-                            </div>
+                        <div id="inbox-messages-container" class="space-y-3 max-h-[420px] overflow-y-auto pr-1"></div>
                     </div>
 
-                    <div id="tab-cms-visitors" class="space-y-4 hidden">
-                        <div class="p-4 rounded-2xl border border-white/10 bg-[#0F0F16] flex items-center justify-between shadow-md">
-                            <div>
-                                <h4 class="text-xs font-bold text-white uppercase">Real-Time Visitor Detection</h4>
-                                <p class="text-[11px] text-slate-400">IP-based country, city, coordinates and device breakdown.</p>
-                            </div>
-                            <button onclick="trackVisitor(true)" class="px-3.5 py-1.5 rounded-xl bg-brand-orange/20 border border-brand-orange/40 text-brand-orange text-xs font-bold hover:bg-brand-orange hover:text-white transition-all">
-                                🔄 Refresh & Test Location
-                            </button>
-                        </div>
-                        <div class="rounded-2xl border border-white/10 bg-[#0F0F16] overflow-x-auto max-h-[400px] shadow-inner">
-                            <table class="w-full text-left text-xs text-slate-300">
-                                <thead class="bg-black/60 text-[10px] uppercase text-brand-orange border-b border-white/10">
-                                    <tr>
-                                        <th class="p-3.5">Flag & Country</th>
-                                        <th class="p-3.5">City / State</th>
-                                        <th class="p-3.5">IP Address</th>
-                                        <th class="p-3.5">Device</th>
-                                        <th class="p-3.5">Visited At</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="visitor-locations-tbody" class="divide-y divide-white/5 font-mono text-[11px]">
-                                    <tr><td colspan="5" class="p-4 text-center text-slate-500">Detecting live incoming traffic...</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div id="tab-cms-personal" class="space-y-4 hidden">
-                        <div class="p-6 rounded-3xl border border-brand-orange/30 bg-[#0F0F16] space-y-4 shadow-xl">
-                            <h4 class="text-xs font-bold text-brand-orange uppercase">Real-time Personal Info Editor</h4>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                                <div class="space-y-1">
-                                    <label class="text-[10px] text-slate-400 uppercase">Portfolio Display Name</label>
-                                    <input type="text" id="edit-name" class="w-full rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none focus:border-brand-orange shadow-inner" />
-                                </div>
-                                <div class="space-y-1">
-                                    <label class="text-[10px] text-slate-400 uppercase">Availability Status</label>
-                                    <input type="text" id="edit-status" class="w-full rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none focus:border-brand-orange shadow-inner" />
-                                </div>
-                                <div class="sm:col-span-2 space-y-1">
-                                    <label class="text-[10px] text-slate-400 uppercase">Hero Tagline</label>
-                                    <textarea id="edit-tagline" rows="2" class="w-full rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none focus:border-brand-orange resize-none shadow-inner"></textarea>
-                                </div>
-                            </div>
-                            <button onclick="savePersonalCloud()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-orange to-[#ff6a33] text-white text-xs font-bold shadow-lg hover:scale-[1.01] transition-transform">
-                                ⚡ Push Updates to Live Portfolio
-                            </button>
-                        </div>
-                    </div>
-
+                    <!-- TAB 4: PROJECTS MANAGER -->
                     <div id="tab-cms-projects" class="space-y-6 hidden">
                         <div class="p-6 rounded-3xl border border-white/10 bg-[#0F0F16] space-y-4 shadow-xl">
                             <h4 class="text-xs font-bold text-brand-orange uppercase">Add New Project</h4>
@@ -714,17 +686,15 @@
                                 <input type="text" id="new-proj-tags" placeholder="Tags (e.g. Python, OpenCV)" class="rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
                                 <input type="text" id="new-proj-demo" placeholder="Live Demo URL" class="rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
                                 <input type="text" id="new-proj-github" placeholder="GitHub URL" class="rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
-                                <textarea id="new-proj-desc" rows="2" placeholder="Brief project description..." class="sm:col-span-2 rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none resize-none shadow-inner"></textarea>
+                                <textarea id="new-proj-desc" rows="2" placeholder="Brief description..." class="sm:col-span-2 rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none resize-none shadow-inner"></textarea>
                             </div>
                             <button onclick="addProjectCloud()" class="w-full py-3 rounded-xl bg-brand-orange text-white text-xs font-bold shadow-md hover:bg-brand-hover transition-all">
-                                + Add Project to Live Portfolio
+                                + Add Project
                             </button>
                         </div>
-
                         <div class="p-6 rounded-3xl border border-white/10 bg-[#0F0F16] space-y-4 shadow-xl">
-                            <h4 class="text-xs font-bold text-white uppercase">Manage Existing Projects (Delete / Edit)</h4>
-                            <div id="admin-projects-list" class="space-y-3 max-h-[300px] overflow-y-auto pr-1">
-                                </div>
+                            <h4 class="text-xs font-bold text-white uppercase">Manage Projects</h4>
+                            <div id="admin-projects-list" class="space-y-3 max-h-[300px] overflow-y-auto pr-1"></div>
                         </div>
                     </div>
 
@@ -733,11 +703,12 @@
         </div>
     </div>
 
+    <!-- Core Scripts -->
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        const SECURE_PASS = "Q09MTEVHRTEx"; 
+        const SECURE_KEY_HASH = "8f37bc3854eb7154fb02cb570530df524e75143a411516766cd533c7df44a95e";
         let isAuthorized = false;
 
         const defaultProjects = [
@@ -788,6 +759,13 @@
             });
         }
 
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
         function handleControlCenterAccess() {
             if (isAuthorized) {
                 openControlCenter();
@@ -799,19 +777,17 @@
             }
         }
 
-        function verifyPasscode() {
+        async function verifyPasscode() {
             const entered = document.getElementById('auth-pass-input').value;
             if (!entered) return;
 
-            try {
-                if (btoa(entered) === SECURE_PASS) {
-                    isAuthorized = true;
-                    document.getElementById('auth-lock-modal').classList.add('hidden');
-                    openControlCenter();
-                } else {
-                    throw new Error();
-                }
-            } catch(e) {
+            const hashedInput = await sha256(entered);
+
+            if (hashedInput === SECURE_KEY_HASH) {
+                isAuthorized = true;
+                document.getElementById('auth-lock-modal').classList.add('hidden');
+                openControlCenter();
+            } else {
                 const box = document.getElementById('auth-box');
                 const errMsg = document.getElementById('auth-error-msg');
                 errMsg.classList.remove('hidden');
@@ -833,52 +809,61 @@
             closeControlCenter();
         }
 
-        function handleContactSubmit(event, form) {
-            event.preventDefault();
-            const submitBtn = document.getElementById('submit-btn');
-            const originalText = submitBtn.innerText;
+        // FILES & FOLDERS MANAGER LOGIC
+        function renderFilesList() {
+            let files = JSON.parse(localStorage.getItem('hs_cloud_files') || '[]');
+            const listEl = document.getElementById('admin-files-list');
+            document.getElementById('badge-files-count').innerText = files.length;
 
-            submitBtn.innerText = "Sending Message...";
-            submitBtn.disabled = true;
+            if (!listEl) return;
+            if (files.length === 0) {
+                listEl.innerHTML = '<p class="text-xs text-slate-500 text-center py-4">No files or folders added yet.</p>';
+                return;
+            }
 
-            const name = form.name.value;
-            const email = form.email.value;
-            const subject = form.subject.value;
-            const message = form.message.value;
-            const timestamp = new Date().toLocaleTimeString() + ' | ' + new Date().toLocaleDateString();
+            listEl.innerHTML = files.map((f, idx) => `
+                <div class="p-4 rounded-2xl border border-white/10 bg-black/40 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">${f.type === 'folder' ? '📁' : '📄'}</span>
+                        <div>
+                            <h5 class="text-xs font-bold text-white">${f.name}</h5>
+                            <a href="${f.link || '#'}" target="_blank" class="text-[10px] text-brand-orange underline truncate max-w-xs block">${f.link || 'No URL attached'}</a>
+                        </div>
+                    </div>
+                    <button onclick="deleteCloudItem(${idx})" class="px-3 py-1.5 rounded-xl bg-red-500/20 border border-red-500/40 text-red-400 hover:bg-red-500 hover:text-white text-xs font-bold transition-all">
+                        Delete
+                    </button>
+                </div>
+            `).join('');
+        }
 
-            const newMsg = { name, email, subject, message, timestamp };
-            let messages = JSON.parse(localStorage.getItem('hs_inbox_messages') || '[]');
-            messages.unshift(newMsg);
-            localStorage.setItem('hs_inbox_messages', JSON.stringify(messages));
-            renderMessagesInbox();
+        function addCloudItem() {
+            const name = document.getElementById('new-item-name').value;
+            const type = document.getElementById('new-item-type').value;
+            const link = document.getElementById('new-item-link').value;
 
-            const serviceID = 'service_8uidbsu'; 
-            const templateID = 'template_9e467km';
+            if (!name) {
+                alert("Please enter a name for the file or folder!");
+                return;
+            }
 
-            emailjs.sendForm(serviceID, templateID, form)
-                .then(() => {
-                    submitBtn.innerText = "✅ Message Sent Successfully!";
-                    submitBtn.style.backgroundColor = "#10B981"; 
-                    form.reset();
+            let files = JSON.parse(localStorage.getItem('hs_cloud_files') || '[]');
+            files.push({ name, type, link });
+            localStorage.setItem('hs_cloud_files', JSON.stringify(files));
 
-                    setTimeout(() => {
-                        submitBtn.innerText = originalText;
-                        submitBtn.style.backgroundColor = ""; 
-                        submitBtn.disabled = false;
-                    }, 3000);
-                }, (err) => {
-                    submitBtn.innerText = "❌ Failed! Try again";
-                    submitBtn.style.backgroundColor = "#EF4444";
-                    
-                    setTimeout(() => {
-                        submitBtn.innerText = originalText;
-                        submitBtn.style.backgroundColor = "";
-                        submitBtn.disabled = false;
-                    }, 3000);
-                    
-                    console.error("EmailJS Error:", err);
-                });
+            renderFilesList();
+            alert("✅ File/Folder Added Successfully!");
+            document.getElementById('new-item-name').value = '';
+            document.getElementById('new-item-link').value = '';
+        }
+
+        function deleteCloudItem(index) {
+            if (confirm("Are you sure you want to delete this item?")) {
+                let files = JSON.parse(localStorage.getItem('hs_cloud_files') || '[]');
+                files.splice(index, 1);
+                localStorage.setItem('hs_cloud_files', JSON.stringify(files));
+                renderFilesList();
+            }
         }
 
         function renderProjects() {
@@ -886,7 +871,6 @@
             const wrapper = document.getElementById('dynamic-swiper-wrapper');
             const adminList = document.getElementById('admin-projects-list');
 
-            document.getElementById('stat-total-projects').innerText = projects.length;
             document.getElementById('badge-projects-count').innerText = projects.length;
 
             if (wrapper) {
@@ -972,139 +956,36 @@
         function renderMessagesInbox() {
             const messages = JSON.parse(localStorage.getItem('hs_inbox_messages') || '[]');
             const container = document.getElementById('inbox-messages-container');
-            const statTotal = document.getElementById('stat-total-messages');
             const badgeCount = document.getElementById('badge-inbox-count');
 
-            if (statTotal) statTotal.innerText = messages.length;
             if (badgeCount) badgeCount.innerText = messages.length;
-
             if (!container) return;
 
             if (messages.length === 0) {
-                container.innerHTML = `
-                    <div class="p-8 rounded-2xl border border-white/5 bg-[#0B0F19] text-center text-xs text-slate-500">
-                        No messages in inbox. Incoming queries will appear here automatically.
-                    </div>
-                `;
+                container.innerHTML = '<div class="p-8 rounded-2xl border border-white/5 bg-[#0B0F19] text-center text-xs text-slate-500">No messages in inbox.</div>';
                 return;
             }
 
             container.innerHTML = messages.map((m) => `
-                <div class="p-4 rounded-2xl border border-white/10 bg-[#0B0F19] hover:border-brand-orange/40 transition-all space-y-2 shadow-sm">
+                <div class="p-4 rounded-2xl border border-white/10 bg-[#0B0F19] space-y-2">
                     <div class="flex items-center justify-between border-b border-white/5 pb-2">
-                        <div class="flex items-center gap-2">
-                            <span class="h-2 w-2 rounded-full bg-brand-orange"></span>
-                            <span class="font-bold text-white text-xs">${m.name}</span>
-                            <span class="text-[11px] text-slate-400 font-mono">&lt;${m.email}&gt;</span>
-                        </div>
+                        <span class="font-bold text-white text-xs">${m.name} &lt;${m.email}&gt;</span>
                         <span class="text-[10px] text-slate-500 font-mono">${m.timestamp}</span>
                     </div>
-                    <div>
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-brand-orange">Subject: ${m.subject}</span>
-                        <p class="text-xs text-slate-300 mt-1 leading-relaxed bg-black/40 p-3 rounded-xl border border-white/5 shadow-inner">${m.message}</p>
-                    </div>
-                    <div class="flex justify-end gap-2 pt-1">
-                        <a href="mailto:${m.email}?subject=Re: ${encodeURIComponent(m.subject)}" class="px-3 py-1.5 rounded-lg bg-brand-orange/20 text-brand-orange hover:bg-brand-orange hover:text-white text-[10px] font-bold transition-all shadow-sm">
-                            Reply to Sender
-                        </a>
-                    </div>
+                    <p class="text-xs text-slate-300 bg-black/40 p-3 rounded-xl">${m.message}</p>
                 </div>
             `).join('');
         }
 
         function clearMessagesLog() {
-            if (confirm("Are you sure you want to clear your messages inbox?")) {
+            if (confirm("Clear inbox?")) {
                 localStorage.removeItem('hs_inbox_messages');
                 renderMessagesInbox();
             }
         }
 
-        async function trackVisitor(force = false) {
-            let visitor = null;
-
-            try {
-                const res = await fetch('https://ipwho.is/');
-                const data = await res.json();
-                if (data && data.success !== false) {
-                    visitor = {
-                        ip: data.ip,
-                        city: data.city || 'Kanpur',
-                        region: data.region || 'Uttar Pradesh',
-                        country: data.country || 'India',
-                        country_code: data.country_code ? data.country_code.toLowerCase() : 'in',
-                        device: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
-                        timestamp: new Date().toLocaleTimeString() + ', ' + new Date().toLocaleDateString()
-                    };
-                }
-            } catch (e) {}
-
-            if (!visitor) {
-                try {
-                    const res2 = await fetch('https://ipapi.co/json/');
-                    const data2 = await res2.json();
-                    visitor = {
-                        ip: data2.ip || '127.0.0.1',
-                        city: data2.city || 'Kanpur',
-                        region: data2.region || 'Uttar Pradesh',
-                        country: data2.country_name || 'India',
-                        country_code: data2.country_code ? data2.country_code.toLowerCase() : 'in',
-                        device: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
-                        timestamp: new Date().toLocaleTimeString() + ', ' + new Date().toLocaleDateString()
-                    };
-                } catch(e) {
-                    visitor = {
-                        ip: '103.120.30.1',
-                        city: 'Kanpur',
-                        region: 'Uttar Pradesh',
-                        country: 'India',
-                        country_code: 'in',
-                        device: 'Desktop',
-                        timestamp: new Date().toLocaleTimeString() + ', ' + new Date().toLocaleDateString()
-                    };
-                }
-            }
-
-            if (visitor) {
-                let logs = JSON.parse(localStorage.getItem('hs_visitor_logs') || '[]');
-                if (force || logs.length === 0 || logs[0].ip !== visitor.ip) {
-                    logs.unshift(visitor);
-                    if(logs.length > 30) logs.pop();
-                    localStorage.setItem('hs_visitor_logs', JSON.stringify(logs));
-                }
-            }
-
-            renderVisitorLogs();
-        }
-
-        function renderVisitorLogs() {
-            const logs = JSON.parse(localStorage.getItem('hs_visitor_logs') || '[]');
-            const tbody = document.getElementById('visitor-locations-tbody');
-            
-            document.getElementById('stat-total-visits').innerText = logs.length || 1;
-            const uniqueCountries = new Set(logs.map(l => l.country));
-            document.getElementById('stat-live-countries').innerText = uniqueCountries.size || 1;
-
-            if (logs.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-slate-500">No visitors recorded yet. Click "Refresh & Test Location".</td></tr>';
-                return;
-            }
-
-            tbody.innerHTML = logs.map(l => `
-                <tr class="hover:bg-white/5 transition-colors">
-                    <td class="p-3.5 flex items-center gap-2">
-                        <img src="https://flagcdn.com/20x15/${l.country_code}.png" alt="" class="rounded-sm shadow-sm" onerror="this.style.display='none'"/>
-                        <span class="font-bold text-white">${l.country}</span>
-                    </td>
-                    <td class="p-3.5">${l.city}, ${l.region}</td>
-                    <td class="p-3.5 text-slate-400">${l.ip}</td>
-                    <td class="p-3.5 text-brand-orange font-bold">${l.device}</td>
-                    <td class="p-3.5 text-slate-500">${l.timestamp}</td>
-                </tr>
-            `).join('');
-        }
-
         function switchTab(tab) {
-            ['dashboard', 'inbox', 'personal', 'projects', 'visitors'].forEach(t => {
+            ['dashboard', 'files', 'inbox', 'projects'].forEach(t => {
                 const el = document.getElementById('tab-' + (t === 'dashboard' ? 'dashboard' : 'cms-' + t));
                 const btn = document.getElementById('btn-tab-' + t);
                 if (el) el.classList.add('hidden');
@@ -1125,47 +1006,20 @@
 
         function openControlCenter() {
             document.getElementById('control-center-modal').classList.remove('hidden');
-            renderVisitorLogs();
+            renderFilesList();
             renderMessagesInbox();
             renderProjects();
         }
+
         function closeControlCenter() {
             document.getElementById('control-center-modal').classList.add('hidden');
         }
 
-        function savePersonalCloud() {
-            const name = document.getElementById('edit-name').value;
-            const status = document.getElementById('edit-status').value;
-            const tagline = document.getElementById('edit-tagline').value;
-
-            document.getElementById('hero-name-display').innerText = name;
-            document.getElementById('hero-status-display').innerText = status;
-            document.getElementById('hero-tagline-display').innerText = tagline;
-
-            localStorage.setItem('hs_name', name);
-            localStorage.setItem('hs_status', status);
-            localStorage.setItem('hs_tagline', tagline);
-
-            alert("✅ Real-time Portfolio Synced Successfully!");
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             renderProjects();
-            AOS.init({ duration: 1000, once: true });
-            trackVisitor();
+            renderFilesList();
             renderMessagesInbox();
-
-            const savedName = localStorage.getItem('hs_name') || 'Himank Singh';
-            const savedStatus = localStorage.getItem('hs_status') || 'Open to Work';
-            const savedTagline = localStorage.getItem('hs_tagline') || 'AI & ML Undergraduate | Full Stack Web Developer passionate about scalable software, modern applications, and intelligent systems.';
-
-            document.getElementById('hero-name-display').innerText = savedName;
-            document.getElementById('hero-status-display').innerText = savedStatus;
-            document.getElementById('hero-tagline-display').innerText = savedTagline;
-
-            document.getElementById('edit-name').value = savedName;
-            document.getElementById('edit-status').value = savedStatus;
-            document.getElementById('edit-tagline').value = savedTagline;
+            AOS.init({ duration: 1000, once: true });
         });
 
         const lenis = new Lenis({ duration: 1.2, smooth: true });

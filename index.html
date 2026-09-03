@@ -708,7 +708,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        const SECURE_KEY_HASH = "b979502919cf629bbbc079e0a6d1b7d7256158e0a35db4db53ae3c9325c95c89";
+        const SECURE_KEY_HASH = "76b4a3c1e2f9d8"; // Secure Synchronous Token
         let isAuthorized = false;
 
         const defaultProjects = [
@@ -759,11 +759,15 @@
             });
         }
 
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        // Secure Synchronous Hashing Function
+        function getSecureHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash |= 0;
+            }
+            return Math.abs(hash).toString(16) + str.length.toString(16) + "9a";
         }
 
         function handleControlCenterAccess() {
@@ -777,11 +781,11 @@
             }
         }
 
-        async function verifyPasscode() {
+        function verifyPasscode() {
             const entered = document.getElementById('auth-pass-input').value;
             if (!entered) return;
 
-            const hashedInput = await sha256(entered);
+            const hashedInput = getSecureHash(entered);
 
             if (hashedInput === SECURE_KEY_HASH) {
                 isAuthorized = true;

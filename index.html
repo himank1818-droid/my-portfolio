@@ -1250,6 +1250,48 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    const submitButton = document.getElementById('submit-btn');
+                    const formData = new FormData(contactForm);
+                    const name = String(formData.get('name') || '').trim();
+                    const email = String(formData.get('email') || '').trim();
+                    const subject = String(formData.get('subject') || '').trim();
+                    const message = String(formData.get('message') || '').trim();
+                    if (!name || !email || !subject || !message) return;
+
+                    submitButton.disabled = true;
+                    submitButton.innerText = 'Sending...';
+                    try {
+                        await emailjs.send('service_8uidbsu', 'template_9e467km', {
+                            name,
+                            email,
+                            subject,
+                            message,
+                            to_email: 'himank1818@gmail.com'
+                        });
+                        await emailjs.send('service_8uidbsu', 'template_7zia2wv', {
+                            name,
+                            email,
+                            subject,
+                            message,
+                            to_email: email,
+                            reply_to: 'himank1818@gmail.com'
+                        });
+                        contactForm.reset();
+                        submitButton.innerText = 'Message Sent ✓';
+                        alert('Message sent. A thank-you email has also been sent to you.');
+                    } catch (error) {
+                        console.error('Contact email delivery failed:', error);
+                        submitButton.innerText = 'Try Again';
+                        alert('Message could not be sent. Please try again.');
+                    } finally {
+                        submitButton.disabled = false;
+                    }
+                });
+            }
             renderProjects();
             renderFilesList();
             renderMessagesInbox();

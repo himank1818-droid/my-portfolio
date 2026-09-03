@@ -1062,7 +1062,6 @@
             if (confirm("Clear inbox?")) {
                 localStorage.removeItem('hs_inbox_messages');
                 renderMessagesInbox();
-                startSharedContentSync();
             }
         }
 
@@ -1101,6 +1100,7 @@
             renderProjects();
             renderFilesList();
             renderMessagesInbox();
+            startSharedContentSync();
             AOS.init({ duration: 1000, once: true });
         });
 

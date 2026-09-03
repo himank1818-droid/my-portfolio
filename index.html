@@ -338,6 +338,10 @@
                                 <span class="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-200">Tailwind CSS</span>
                             </div>
                         </div>
+                        <div class="mt-8 rounded-3xl border border-white/15 bg-gradient-to-b from-[#141420] to-[#08080c] p-8">
+                            <h3 class="text-2xl font-bold text-white">Live Skills</h3>
+                            <div id="live-skills-list" class="mt-5 flex flex-wrap gap-2.5"></div>
+                        </div>
                     </div>
 
                     <div class="relative overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-[#141420] to-[#08080c] p-8 transition-all duration-300 hover:-translate-y-2 hover:border-brand-orange hover:shadow-[0_20px_50px_rgba(255,85,0,0.25)]">
@@ -625,6 +629,10 @@
                             <span class="flex items-center gap-3">📂 Projects Manager</span>
                             <span id="badge-projects-count" class="px-2 py-0.5 rounded-full bg-brand-orange text-white text-[10px] font-bold">3</span>
                         </button>
+                        <button onclick="switchTab('skills')" id="btn-tab-skills" class="w-full flex items-center justify-between px-4 py-2.5 rounded-2xl text-slate-400 hover:text-white hover:bg-white/5 text-xs font-semibold transition-all">
+                            <span class="flex items-center gap-3">🛠️ Skills Manager</span>
+                            <span id="badge-skills-count" class="px-2 py-0.5 rounded-full bg-brand-orange text-white text-[10px] font-bold">0</span>
+                        </button>
                     </div>
                 </div>
 
@@ -636,6 +644,17 @@
                         <div class="p-6 rounded-3xl border border-white/10 bg-gradient-to-r from-[#141420] via-[#0E0E14] to-[#0A0A0E] shadow-xl">
                             <h3 class="text-2xl font-black text-white">Welcome back, Himank 👋</h3>
                             <p class="text-xs text-slate-400 mt-1">Manage your secure files, folders, projects, and contact inbox.</p>
+                            <div class="mt-5 rounded-2xl border border-brand-orange/30 bg-brand-orange/10 p-4">
+                                <p class="text-xs text-slate-300">Live visitors currently online</p>
+                                <p id="active-users-count" class="mt-1 text-3xl font-black text-brand-orange">0</p>
+                                <div id="active-users-list" class="mt-2 text-[10px] text-slate-400"></div>
+                            </div>
+                            <div class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                <input id="cms-name" placeholder="Display name" class="rounded-xl border border-white/10 bg-white/5 p-3 text-xs text-white outline-none" />
+                                <input id="cms-status" placeholder="Status" class="rounded-xl border border-white/10 bg-white/5 p-3 text-xs text-white outline-none" />
+                                <textarea id="cms-tagline" rows="2" placeholder="Hero description / tagline" class="rounded-xl border border-white/10 bg-white/5 p-3 text-xs text-white outline-none sm:col-span-2"></textarea>
+                                <button onclick="savePersonalContent()" class="rounded-xl bg-brand-orange p-3 text-xs font-bold text-white sm:col-span-2">Save Live Profile Content</button>
+                            </div>
                         </div>
                     </div>
 
@@ -680,7 +699,7 @@
                     <!-- TAB 4: PROJECTS MANAGER -->
                     <div id="tab-cms-projects" class="space-y-6 hidden">
                         <div class="p-6 rounded-3xl border border-white/10 bg-[#0F0F16] space-y-4 shadow-xl">
-                            <h4 class="text-xs font-bold text-brand-orange uppercase">Add New Project</h4>
+                            <h4 id="project-form-heading" class="text-xs font-bold text-brand-orange uppercase">Add New Project</h4>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                                 <input type="text" id="new-proj-title" placeholder="Project Title" class="rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
                                 <input type="text" id="new-proj-tags" placeholder="Tags (e.g. Python, OpenCV)" class="rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
@@ -688,13 +707,24 @@
                                 <input type="text" id="new-proj-github" placeholder="GitHub URL" class="rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
                                 <textarea id="new-proj-desc" rows="2" placeholder="Brief description..." class="sm:col-span-2 rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none resize-none shadow-inner"></textarea>
                             </div>
-                            <button onclick="addProjectCloud()" class="w-full py-3 rounded-xl bg-brand-orange text-white text-xs font-bold shadow-md hover:bg-brand-hover transition-all">
+                            <button id="project-submit-button" onclick="addProjectCloud()" class="w-full py-3 rounded-xl bg-brand-orange text-white text-xs font-bold shadow-md hover:bg-brand-hover transition-all">
                                 + Add Project
                             </button>
                         </div>
                         <div class="p-6 rounded-3xl border border-white/10 bg-[#0F0F16] space-y-4 shadow-xl">
                             <h4 class="text-xs font-bold text-white uppercase">Manage Projects</h4>
                             <div id="admin-projects-list" class="space-y-3 max-h-[300px] overflow-y-auto pr-1"></div>
+                        </div>
+                    </div>
+
+                    <div id="tab-cms-skills" class="space-y-6 hidden">
+                        <div class="p-6 rounded-3xl border border-white/10 bg-[#0F0F16] space-y-4 shadow-xl">
+                            <h4 class="text-xs font-bold text-brand-orange uppercase">Add or Remove Skills</h4>
+                            <div class="flex gap-3">
+                                <input type="text" id="new-skill-name" placeholder="Skill name (e.g. TypeScript)" class="flex-1 rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none shadow-inner" />
+                                <button onclick="addSkill()" class="px-5 rounded-xl bg-brand-orange text-white text-xs font-bold">Add</button>
+                            </div>
+                            <div id="admin-skills-list" class="flex flex-wrap gap-2"></div>
                         </div>
                     </div>
 
@@ -756,6 +786,14 @@
                 comingSoon: false
             }
         ];
+        const defaultSkills = [
+            'React.js', 'Node / Express', 'MongoDB', 'Tailwind CSS',
+            'Python', 'C / C++', 'JavaScript', 'REST APIs',
+            'Git & GitHub', 'VS Code', 'Vercel & Render', 'Postman'
+        ];
+        let editingProjectIndex = -1;
+        let presenceRef = null;
+        let presenceKey = null;
 
         let swiper = null;
         function initSwiper() {
@@ -871,7 +909,65 @@
                     localStorage.setItem('hs_tagline', content.personal.tagline || '');
                     applyPersonalContent();
                 }
+                if (content.skills) {
+                    localStorage.setItem('hs_skills', JSON.stringify(content.skills));
+                    renderSkills();
+                }
             }, error => console.error('Firebase sync listener failed:', error));
+        }
+
+        function renderSkills() {
+            const skills = JSON.parse(localStorage.getItem('hs_skills') || JSON.stringify(defaultSkills));
+            const publicList = document.getElementById('live-skills-list');
+            const adminList = document.getElementById('admin-skills-list');
+            const badge = document.getElementById('badge-skills-count');
+            if (badge) badge.innerText = skills.length;
+            if (publicList) publicList.innerHTML = skills.map(skill => `<span class="rounded-xl border border-brand-orange/40 bg-brand-orange/10 px-4 py-2 text-xs font-medium text-slate-200">${skill}</span>`).join('');
+            if (adminList) adminList.innerHTML = skills.map((skill, index) => `<span class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs text-slate-200">${skill}<button onclick="deleteSkill(${index})" class="text-red-400 hover:text-red-300" aria-label="Delete ${skill}">×</button></span>`).join('');
+        }
+
+        function addSkill() {
+            const input = document.getElementById('new-skill-name');
+            const skill = input.value.trim();
+            if (!skill) { alert('Please enter a skill name.'); return; }
+            const skills = JSON.parse(localStorage.getItem('hs_skills') || JSON.stringify(defaultSkills));
+            if (skills.some(item => item.toLowerCase() === skill.toLowerCase())) { alert('This skill already exists.'); return; }
+            skills.push(skill);
+            localStorage.setItem('hs_skills', JSON.stringify(skills));
+            saveSharedContent({ skills }).catch(error => console.error('Skills sync failed:', error));
+            input.value = '';
+            renderSkills();
+        }
+
+        function deleteSkill(index) {
+            const skills = JSON.parse(localStorage.getItem('hs_skills') || JSON.stringify(defaultSkills));
+            if (!confirm(`Remove ${skills[index]}?`)) return;
+            skills.splice(index, 1);
+            localStorage.setItem('hs_skills', JSON.stringify(skills));
+            saveSharedContent({ skills }).catch(error => console.error('Skills sync failed:', error));
+            renderSkills();
+        }
+
+        function startPresenceTracking() {
+            presenceRef = firebase.database(firebaseApp).ref('portfolio/activeUsers');
+            const register = () => {
+                presenceKey = presenceRef.push().key;
+                if (!presenceKey) return;
+                const current = presenceRef.child(presenceKey);
+                current.onDisconnect().remove();
+                current.set({ connectedAt: firebase.database.ServerValue.TIMESTAMP, lastSeen: firebase.database.ServerValue.TIMESTAMP })
+                    .catch(error => console.error('Presence registration failed:', error));
+                setInterval(() => current.update({ lastSeen: firebase.database.ServerValue.TIMESTAMP }), 30000);
+            };
+            firebase.auth().signInAnonymously().then(register).catch(error => console.error('Anonymous presence auth failed:', error));
+            presenceRef.on('value', snapshot => {
+                const users = snapshot.val() || {};
+                const entries = Object.values(users).filter(user => Date.now() - (user.lastSeen || user.connectedAt || 0) < 90000);
+                const count = document.getElementById('active-users-count');
+                const list = document.getElementById('active-users-list');
+                if (count) count.innerText = entries.length;
+                if (list) list.innerText = entries.map((user, index) => `Visitor ${index + 1} · ${new Date(user.lastSeen || user.connectedAt).toLocaleTimeString()}`).join(' | ');
+            }, error => console.error('Presence listener failed:', error));
         }
 
         function applyPersonalContent() {
@@ -884,6 +980,31 @@
             if (nameDisplay) nameDisplay.innerText = name;
             if (statusDisplay) statusDisplay.innerText = status;
             if (taglineDisplay) taglineDisplay.innerText = tagline;
+            const nameInput = document.getElementById('cms-name');
+            const statusInput = document.getElementById('cms-status');
+            const taglineInput = document.getElementById('cms-tagline');
+            if (nameInput) nameInput.value = name;
+            if (statusInput) statusInput.value = status;
+            if (taglineInput) taglineInput.value = tagline;
+        }
+
+        function savePersonalContent() {
+            const personal = {
+                name: document.getElementById('cms-name').value.trim(),
+                status: document.getElementById('cms-status').value.trim(),
+                tagline: document.getElementById('cms-tagline').value.trim()
+            };
+            if (!personal.name || !personal.tagline) { alert('Name and description are required.'); return; }
+            localStorage.setItem('hs_name', personal.name);
+            localStorage.setItem('hs_status', personal.status || 'Open to Work');
+            localStorage.setItem('hs_tagline', personal.tagline);
+            saveSharedContent({ personal }).then(() => {
+                applyPersonalContent();
+                alert('Profile content updated live for all visitors.');
+            }).catch(error => {
+                console.error('Profile sync failed:', error);
+                alert('Could not sync profile content. Please try again.');
+            });
         }
 
         // FILES & FOLDERS MANAGER LOGIC
@@ -990,9 +1111,10 @@
                             <h5 class="text-xs font-bold text-white">${p.title}</h5>
                             <p class="text-[10px] text-slate-400 truncate max-w-xs">${p.desc}</p>
                         </div>
-                        <button onclick="deleteProject(${idx})" class="px-3 py-1.5 rounded-xl bg-red-500/20 border border-red-500/40 text-red-400 hover:bg-red-500 hover:text-white text-xs font-bold transition-all">
-                            Delete
-                        </button>
+                        <div class="flex gap-2">
+                            <button onclick="editProject(${idx})" class="px-3 py-1.5 rounded-xl bg-brand-orange/20 border border-brand-orange/40 text-brand-orange hover:bg-brand-orange hover:text-white text-xs font-bold transition-all">Edit</button>
+                            <button onclick="deleteProject(${idx})" class="px-3 py-1.5 rounded-xl bg-red-500/20 border border-red-500/40 text-red-400 hover:bg-red-500 hover:text-white text-xs font-bold transition-all">Delete</button>
+                        </div>
                     </div>
                 `).join('');
             }
@@ -1011,7 +1133,15 @@
             }
 
             let projects = JSON.parse(localStorage.getItem('hs_custom_projects') || JSON.stringify(defaultProjects));
-            projects.push({ title, tags, desc, demo, github, comingSoon: demo === '#' });
+            const project = { title, tags, desc, demo, github, comingSoon: demo === '#' };
+            if (editingProjectIndex >= 0) {
+                projects[editingProjectIndex] = project;
+                editingProjectIndex = -1;
+                document.getElementById('project-form-heading').innerText = 'Add New Project';
+                document.getElementById('project-submit-button').innerText = '+ Add Project';
+            } else {
+                projects.push(project);
+            }
             localStorage.setItem('hs_custom_projects', JSON.stringify(projects));
             saveSharedContent({ projects }).catch(error => console.error('Project sync failed:', error));
 
@@ -1022,6 +1152,21 @@
             document.getElementById('new-proj-demo').value = '';
             document.getElementById('new-proj-github').value = '';
             document.getElementById('new-proj-desc').value = '';
+        }
+
+        function editProject(index) {
+            const projects = JSON.parse(localStorage.getItem('hs_custom_projects') || JSON.stringify(defaultProjects));
+            const project = projects[index];
+            if (!project) return;
+            editingProjectIndex = index;
+            document.getElementById('new-proj-title').value = project.title || '';
+            document.getElementById('new-proj-tags').value = (project.tags || []).join(', ');
+            document.getElementById('new-proj-demo').value = project.demo === '#' ? '' : (project.demo || '');
+            document.getElementById('new-proj-github').value = project.github === '#' ? '' : (project.github || '');
+            document.getElementById('new-proj-desc').value = project.desc || '';
+            document.getElementById('project-form-heading').innerText = 'Edit Project';
+            document.getElementById('project-submit-button').innerText = 'Save Project Changes';
+            document.getElementById('new-proj-title').focus();
         }
 
         function deleteProject(index) {
@@ -1066,7 +1211,7 @@
         }
 
         function switchTab(tab) {
-            ['dashboard', 'files', 'inbox', 'projects'].forEach(t => {
+            ['dashboard', 'files', 'inbox', 'projects', 'skills'].forEach(t => {
                 const el = document.getElementById('tab-' + (t === 'dashboard' ? 'dashboard' : 'cms-' + t));
                 const btn = document.getElementById('btn-tab-' + t);
                 if (el) el.classList.add('hidden');
@@ -1089,6 +1234,7 @@
             document.getElementById('control-center-modal').classList.remove('hidden');
             renderFilesList();
             renderMessagesInbox();
+            renderSkills();
             renderProjects();
         }
 
@@ -1100,7 +1246,9 @@
             renderProjects();
             renderFilesList();
             renderMessagesInbox();
+            renderSkills();
             startSharedContentSync();
+            startPresenceTracking();
             AOS.init({ duration: 1000, once: true });
         });
 

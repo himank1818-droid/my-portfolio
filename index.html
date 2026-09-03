@@ -744,6 +744,7 @@
         const AUTH_SALT = "7b4f2c9a1d6e8f3052a7c9e4b6d1f083";
         const SECURE_KEY_HASH = "58dc3a8f3e63996f4a903c065cbb047d1f160a6e1f76e42092733209e0c23ef7";
         const PBKDF2_ITERATIONS = 600000;
+        const DEFAULT_TAGLINE = "Undergraduate Engineer | Full Stack Web Developer building high-performance applications, secure backend systems, and neural intelligence.";
         const ADMIN_EMAIL = "himanksingh733@gmail.com";
         const ADMIN_UID = "HMHWics3SlXwk2R44AgGQZemwK22";
         const firebaseApp = firebase.initializeApp({
@@ -906,7 +907,9 @@
                 if (content.personal) {
                     localStorage.setItem('hs_name', content.personal.name || 'Himank Singh');
                     localStorage.setItem('hs_status', content.personal.status || 'Open to Work');
-                    localStorage.setItem('hs_tagline', content.personal.tagline || '');
+                    if (content.personal.tagline && content.personal.tagline.trim()) {
+                        localStorage.setItem('hs_tagline', content.personal.tagline.trim());
+                    }
                     applyPersonalContent();
                 }
                 if (content.skills) {
@@ -973,7 +976,7 @@
         function applyPersonalContent() {
             const name = localStorage.getItem('hs_name') || 'Himank Singh';
             const status = localStorage.getItem('hs_status') || 'Open to Work';
-            const tagline = localStorage.getItem('hs_tagline') || '';
+            const tagline = localStorage.getItem('hs_tagline') || DEFAULT_TAGLINE;
             const nameDisplay = document.getElementById('hero-name-display');
             const statusDisplay = document.getElementById('hero-status-display');
             const taglineDisplay = document.getElementById('hero-tagline-display');

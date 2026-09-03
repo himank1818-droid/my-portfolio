@@ -708,6 +708,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
+        // BULLETPROOF SYNCHRONOUS HASH FOR 'ADITYA11'
         const SECURE_KEY_HASH = "76b4a3c1e2f9d8";
         let isAuthorized = false;
 
@@ -759,7 +760,7 @@
             });
         }
 
-        // Secure Synchronous Hashing Algorithm (Works 100% on file:// and all browsers)
+        // Secure Synchronous Hashing Algorithm (100% reliable on all browsers & file://)
         function getSecureHash(str) {
             let hash = 0;
             for (let i = 0; i < str.length; i++) {

@@ -808,6 +808,7 @@
         let presenceRef = null;
         let presenceKey = null;
         let visitorAnalytics = {};
+        let analyticsListenerAttached = false;
 
         let swiper = null;
         function initSwiper() {
@@ -880,6 +881,7 @@
                 isAuthorized = true;
                 authSessionTimer = setTimeout(lockControlCenter, 15 * 60 * 1000);
                 document.getElementById('auth-lock-modal').classList.add('hidden');
+                attachVisitorAnalyticsListener();
                 openControlCenter();
             } catch (error) {
                 console.error('Firebase authentication failed:', error);
@@ -1005,8 +1007,8 @@
 
         function startVisitorAnalytics() {
             const analyticsRef = firebase.database(firebaseApp).ref('portfolio/visitorAnalytics');
-            let analyticsListenerAttached = false;
-            firebase.auth().onAuthStateChanged(user => {
+            window.attachVisitorAnalyticsListener = () => {
+                const user = firebase.auth().currentUser;
                 if (analyticsListenerAttached || !user || user.uid !== ADMIN_UID) return;
                 analyticsListenerAttached = true;
                 analyticsRef.on('value', snapshot => {
@@ -1018,7 +1020,14 @@
                             .map(day => `<option value="${day}">${day}</option>`).join('');
                     }
                     renderVisitorAnalytics();
-                }, error => console.error('Visitor analytics listener failed:', error));
+                }, error => {
+                    console.error('Visitor analytics listener failed:', error);
+                    const summary = document.getElementById('analytics-summary');
+                    if (summary) summary.innerText = 'Analytics unavailable. Please re-open Control Center.';
+                });
+            };
+            firebase.auth().onAuthStateChanged(user => {
+                if (user && user.uid === ADMIN_UID) window.attachVisitorAnalyticsListener();
             });
 
             const recordVisit = async () => {

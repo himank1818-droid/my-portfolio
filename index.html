@@ -992,6 +992,20 @@
             return new Date(timestamp).toISOString().slice(0, 10);
         }
 
+        function getDeviceName() {
+            const agent = navigator.userAgent;
+            if (/iPhone/i.test(agent)) return 'iPhone';
+            if (/iPad/i.test(agent)) return 'iPad';
+            if (/Android/i.test(agent)) {
+                const model = agent.match(/Android[^;]*;\s*(?:[a-z]{2}-[A-Z]{2};\s*)?([^;)]+?)(?:\s+Build\/[^;)]+)?[;)]/i);
+                return model && model[1] ? `Android · ${model[1].trim()}` : 'Android phone';
+            }
+            if (/Windows/i.test(agent)) return 'Windows PC';
+            if (/Macintosh/i.test(agent)) return 'Mac';
+            if (/Linux/i.test(agent)) return 'Linux computer';
+            return 'Unknown device';
+        }
+
         function renderVisitorAnalytics() {
             const filter = document.getElementById('analytics-day-filter');
             const selectedDay = filter && filter.value ? filter.value : getAnalyticsDate(Date.now());
@@ -1001,7 +1015,7 @@
             const list = document.getElementById('visitor-analytics-list');
             if (summary) summary.innerText = `${entries.length} visit${entries.length === 1 ? '' : 's'} on ${selectedDay}`;
             if (list) list.innerHTML = entries.length
-                ? entries.map(visit => `<div class="flex items-center justify-between gap-3 rounded-lg border border-white/5 bg-white/5 px-3 py-2"><span>${new Date(visit.timestamp).toLocaleTimeString()} · ${visit.location || 'Unknown location'}</span><span class="text-slate-500">${visit.device || 'Web'}</span></div>`).join('')
+                ? entries.map(visit => `                <div class="flex items-center justify-between gap-3 rounded-lg border border-white/5 bg-white/5 px-3 py-2"><span>${new Date(visit.timestamp).toLocaleTimeString()} · ${visit.location || 'Unknown location'}</span><span class="text-slate-500">${visit.device || 'Unknown device'}</span></div>`).join('')
                 : '<p>No visits recorded for this day.</p>';
         }
 
@@ -1039,7 +1053,7 @@
                     await firebase.database(firebaseApp).ref(`portfolio/visitorAnalytics/${day}`).push({
                         timestamp,
                         location: [location.city, location.region, location.country].filter(Boolean).join(', ') || 'Unknown location',
-                        device: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop'
+                        device: getDeviceName()
                     });
                 } catch (error) {
                     console.error('Visitor analytics recording failed:', error);

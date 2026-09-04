@@ -717,9 +717,6 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        const AUTH_SALT = "7b4f2c9a1d6e8f3052a7c9e4b6d1f083";
-        const SECURE_KEY_HASH = "58dc3a8f3e63996f4a903c065cbb047d1f160a6e1f76e42092733209e0c23ef7";
-        const PBKDF2_ITERATIONS = 600000;
         const DEFAULT_TAGLINE = "Undergraduate Engineer | Full Stack Web Developer building high-performance applications, secure backend systems, and neural intelligence.";
         function isValidTagline(value) {
             return typeof value === 'string' && value.trim().length >= 10 && /[A-Za-z]/.test(value);
@@ -798,26 +795,6 @@
             });
         }
 
-        async function derivePasswordHash(password) {
-            const passwordKey = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits']);
-            const hashBuffer = await crypto.subtle.deriveBits({
-                name: 'PBKDF2',
-                salt: new TextEncoder().encode(AUTH_SALT),
-                iterations: PBKDF2_ITERATIONS,
-                hash: 'SHA-256'
-            }, passwordKey, 256);
-            return Array.from(new Uint8Array(hashBuffer)).map(byte => byte.toString(16).padStart(2, '0')).join('');
-        }
-
-        function hashesMatch(expected, actual) {
-            if (expected.length !== actual.length) return false;
-            let difference = 0;
-            for (let index = 0; index < expected.length; index++) {
-                difference |= expected.charCodeAt(index) ^ actual.charCodeAt(index);
-            }
-            return difference === 0;
-        }
-
         function handleControlCenterAccess() {
             if (isAuthorized) {
                 openControlCenter();
@@ -833,12 +810,6 @@
             const entered = document.getElementById('auth-pass-input').value;
             if (!entered) return;
 
-            if (!hashesMatch(SECURE_KEY_HASH, await derivePasswordHash(entered))) {
-                const errMsg = document.getElementById('auth-error-msg');
-                errMsg.classList.remove('hidden');
-                return;
-            }
-
             try {
                 const credential = await firebase.auth().signInWithEmailAndPassword(ADMIN_EMAIL, entered);
                 if (credential.user.uid !== ADMIN_UID) {
@@ -848,7 +819,7 @@
                 isAuthorized = true;
                 authSessionTimer = setTimeout(lockControlCenter, 15 * 60 * 1000);
                 document.getElementById('auth-lock-modal').classList.add('hidden');
-                attachVisitorAnalyticsListener();
+                setTimeout(attachVisitorAnalyticsListener, 0);
                 openControlCenter();
             } catch (error) {
                 console.error('Firebase authentication failed:', error);
@@ -996,6 +967,7 @@
 
         function startVisitorAnalytics() {
             const analyticsRef = firebase.database(firebaseApp).ref('portfolio/visitorAnalytics');
+            let analyticsRetryTimer = null;
             window.attachVisitorAnalyticsListener = () => {
                 const user = firebase.auth().currentUser;
                 if (analyticsListenerAttached || !user || user.uid !== ADMIN_UID) return;
@@ -1011,12 +983,24 @@
                     renderVisitorAnalytics();
                 }, error => {
                     console.error('Visitor analytics listener failed:', error);
+                    analyticsListenerAttached = false;
                     const summary = document.getElementById('analytics-summary');
-                    if (summary) summary.innerText = 'Analytics unavailable. Please re-open Control Center.';
+                    if (summary) summary.innerText = 'Connecting to visitor analytics...';
+                    if (analyticsRetryTimer) clearTimeout(analyticsRetryTimer);
+                    analyticsRetryTimer = setTimeout(() => {
+                        if (firebase.auth().currentUser && firebase.auth().currentUser.uid === ADMIN_UID) {
+                            window.attachVisitorAnalyticsListener();
+                        }
+                    }, 1500);
                 });
             };
             firebase.auth().onAuthStateChanged(user => {
-                if (user && user.uid === ADMIN_UID) window.attachVisitorAnalyticsListener();
+                if (user && user.uid === ADMIN_UID) {
+                    window.attachVisitorAnalyticsListener();
+                } else {
+                    analyticsListenerAttached = false;
+                    analyticsRef.off();
+                }
             });
 
             const recordVisit = async () => {

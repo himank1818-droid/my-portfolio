@@ -992,13 +992,21 @@
             return new Date(timestamp).toISOString().slice(0, 10);
         }
 
-        function getDeviceName() {
+        async function getDeviceName() {
             const agent = navigator.userAgent;
-            if (/iPhone/i.test(agent)) return 'iPhone';
-            if (/iPad/i.test(agent)) return 'iPad';
+            if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
+                try {
+                    const details = await navigator.userAgentData.getHighEntropyValues(['model', 'platform']);
+                    if (details.model) return `${details.platform || 'Mobile'} · ${details.model}`;
+                } catch (error) {
+                    console.warn('Detailed device model unavailable:', error);
+                }
+            }
+            if (/iPhone/i.test(agent)) return 'iPhone (model hidden by iOS browser)';
+            if (/iPad/i.test(agent)) return 'iPad (model hidden by iOS browser)';
             if (/Android/i.test(agent)) {
-                const model = agent.match(/Android[^;]*;\s*(?:[a-z]{2}-[A-Z]{2};\s*)?([^;)]+?)(?:\s+Build\/[^;)]+)?[;)]/i);
-                return model && model[1] ? `Android · ${model[1].trim()}` : 'Android phone';
+                const model = agent.match(/Android[^;]*;\s*(?:[^;]+;\s*)?([^;)]+?)(?:\s+Build\/[^;)]+)?[;)]/i);
+                return model && model[1] ? `Android · ${model[1].trim()}` : 'Android phone (model hidden)';
             }
             if (/Windows/i.test(agent)) return 'Windows PC';
             if (/Macintosh/i.test(agent)) return 'Mac';
@@ -1053,7 +1061,7 @@
                     await firebase.database(firebaseApp).ref(`portfolio/visitorAnalytics/${day}`).push({
                         timestamp,
                         location: [location.city, location.region, location.country].filter(Boolean).join(', ') || 'Unknown location',
-                        device: getDeviceName()
+                        device: await getDeviceName()
                     });
                 } catch (error) {
                     console.error('Visitor analytics recording failed:', error);

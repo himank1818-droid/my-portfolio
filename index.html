@@ -131,12 +131,6 @@
             </nav>
 
             <div class="flex items-center gap-3" data-aos="fade-left" data-aos-delay="400">
-                <!-- Control Center Access Button -->
-                <button onclick="handleControlCenterAccess()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-[#14141f] border border-brand-orange/60 hover:bg-brand-orange text-brand-orange hover:text-white text-xs font-extrabold rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(255,85,0,0.3)] hover:scale-105">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                    <span>CONTROL CENTER</span>
-                </button>
-
                 <a href="https://drive.google.com/file/d/1RKCfdhfn5lkeEkpHJIiTXOlhiZKNSToS/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-orange to-[#ff6a33] text-white font-semibold text-xs rounded-full hover:scale-105 transition-all shadow-[0_0_20px_rgba(255,85,0,0.4)]">
                     <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                     <span>Check Out CV</span>
@@ -1295,6 +1289,11 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            if (new URLSearchParams(window.location.search).has('controlcentre')) {
+                const basePath = window.location.pathname.replace(/\/$/, '');
+                window.history.replaceState({}, '', `${basePath}/controlcentre`);
+                handleControlCenterAccess();
+            }
             const contactForm = document.getElementById('contact-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', async (event) => {
